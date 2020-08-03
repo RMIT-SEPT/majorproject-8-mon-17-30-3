@@ -3,16 +3,16 @@
 # Group 00
 
 ## Members
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* Mark Johnson (s3680805)
+* Muhammad Ali Tariq (s377986)
+* Ryan Kelly (s3661678)
+* Kaushal Gawri(s3777121)
+* Prabhav Mohit Mehra (s3743761)
 
 ## Records
 
-* Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
-* ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
+* Github repository : https://github.com/RMIT-SEPT/majorproject-8-mon-17-30-3.git
+* Trello Board : 
 
 
 ## Code documentation
