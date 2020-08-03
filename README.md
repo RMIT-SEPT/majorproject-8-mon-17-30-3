@@ -12,7 +12,7 @@
 ## Records
 
 * Github repository : https://github.com/RMIT-SEPT/majorproject-8-mon-17-30-3.git
-* Trello Board : 
+* Trello Board : https://trello.com/c/eMCTtEMV/67-muhammad-ali-tariq-s3779826
 
 
 ## Code documentation
