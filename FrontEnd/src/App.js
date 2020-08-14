@@ -1,14 +1,17 @@
 import React from 'react';
+
 import './App.css';
-import Dashboard from './components/Dashboard';
-import Header from './components/Layout/Header';
+import Form from './Components/Form'
+//import Login from './Components/Login'
 
 function App() {
   return (
-    <div>
-    <Header/>
-    <Dashboard/>
+
+    <div className="App">
+      <Form />
+      
     </div>
+
   );
 }
 
