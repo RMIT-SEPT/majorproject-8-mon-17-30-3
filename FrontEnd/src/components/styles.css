@@ -1,0 +1,29 @@
+body{
+    margin:0;
+    padding:0;
+    background: url(956711.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+h1{
+    text-align:center;
+}
+.box{
+    color:#fff;
+    background-color: black;
+    margin-left:10%;
+    margin-right:10%;
+    margin-top:2%;
+    border-radius: 10px;
+}
+
+table{
+    border:1px white;
+    text-align: left;
+    margin:auto;
+    
+}
+th,td{
+    padding: 10px;
+}
