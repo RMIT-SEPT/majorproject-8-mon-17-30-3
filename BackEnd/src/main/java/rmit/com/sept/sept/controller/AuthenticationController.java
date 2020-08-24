@@ -67,7 +67,14 @@ public class AuthenticationController {
 			modelAndView.addObject("successMessage", "User is registered successfully!");
 		}
 		modelAndView.addObject("user", new User());
-		modelAndView.setViewName("register");
+		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
+	public ModelAndView index() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("login"); // resources/template/login.html
 		return modelAndView;
 	}
 }
