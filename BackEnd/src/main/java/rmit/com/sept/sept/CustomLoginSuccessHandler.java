@@ -42,6 +42,7 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 			System.out.println(a.getAuthority());
 			roles.add(a.getAuthority());
 		}
+		
 		System.out.println(roles);
 
 		// check user role and decide the redirect URL

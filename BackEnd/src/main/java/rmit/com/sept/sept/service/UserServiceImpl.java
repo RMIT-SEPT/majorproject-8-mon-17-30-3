@@ -22,10 +22,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	private int sessionUserID;
 	
 	@Override
 	public void saveUser(User user) {
-		
+//		System.out.println("Dd"+getSessionUserID());
+//		setSessionUserID(user.getId());
 		user.setPassword(encoder.encode(user.getPassword()));
 		user.setStatus("VERIFIED");
 		Role userRole = roleRepository.findByRole("SITE_USER");
@@ -38,6 +40,14 @@ public class UserServiceImpl implements UserService {
 	public boolean isUserPresent(User user) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public int getSessionUserID() {
+		return sessionUserID;
+	}
+
+	public void setSessionUserID(int sessionUserID) {
+		this.sessionUserID = sessionUserID;
 	}
 
 
