@@ -1,6 +1,19 @@
 import React, { Component } from "react";
 import "./styles.css";
+import axios from 'axios';
+import DataService from './DataService.js';
+
 export default class Booking extends Component {
+
+  state = {
+    person: []
+
+  }
+  componentDidMount() {
+    axios.get('http://localhost:8080/api/person/all').then(response => {this.setState({person: response.data})})
+  }
+
+
   render() {
     return (
       <div className="box">
@@ -11,27 +24,27 @@ export default class Booking extends Component {
             <th>Job</th>
             <th>Date</th>
             <th>Make Booking</th>
+            <th>Date</th>
+            <th>Make Booking</th>
           </tr>
-          <tr>
-            <td>Service 1</td>
-            <td>Job 1</td>
-            <td>1/1/2020</td>
-            <td>.</td>
-          </tr>
-          <tr>
-            <td>Service 2</td>
-            <td>Job 2</td>
-            <td>1/1/2020</td>
-            <td>.</td>
-          </tr>
-          <tr>
-            <td>Service 3</td>
-            <td>Job 3</td>
-            <td>1/1/2020</td>
-            <td>.</td>
-          </tr>
+          <tbody>
+          {
+              this.state.person.map(
+                  person =>
+                      <tr key={person.id}>
+                          <td>{person.desc}</td>
+                          <td>{person.name}</td>
+                          <td>{person.personIdentifier}</td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+              )
+          }
+      </tbody>
         </table>
       </div>
+
+      
     );
   }
 }
