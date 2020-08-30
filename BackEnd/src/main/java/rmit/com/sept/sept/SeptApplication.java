@@ -27,10 +27,7 @@ public class SeptApplication {
 	        st.executeUpdate("INSERT INTO user(user_id,email,lastname,firstname, password, status)VALUES(6,'admin2@admin2.com','admin2','admin2','"+ encodedPassword +"','VERIFIED')");
 	        st.executeUpdate("INSERT INTO role(role_id,role_desc,role_name)VALUES(1,'ADMIN_USER','ADMIN_USER')");
 	        st.executeUpdate("INSERT INTO role(role_id,role_desc,role_name)VALUES(2,'SITE_USER','SITE_USER')");
-	        st.executeQuery("select u.email, r.role_name from user u inner join auth_user_role ur on(u.user_id=ur.auth_user_id) inner join role r on(ur.auth_role_id=r.role_id) where u.email=?");
-	        
-	        
-	        
+	        st.executeQuery("select u.email, r.role_name from user u inner join auth_user_role ur on(u.user_id=ur.auth_user_id) inner join role r on(ur.auth_role_id=r.role_id)");
 
 	        conn.close();
 		} catch (Exception e) { 
