@@ -23,11 +23,11 @@ public class SeptApplication {
 			String url = "jdbc:mysql://localhost:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
 	        Connection conn = DriverManager.getConnection(url,"root","ronaldo7!!"); 
 	        Statement st = conn.createStatement(); 
-	        st.executeUpdate("INSERT INTO auth_user_role(auth_user_id,auth_role_id) VALUES (6,1)");
 	        st.executeUpdate("INSERT INTO user(user_id,email,lastname,firstname, password, status)VALUES(6,'admin2@admin2.com','admin2','admin2','"+ encodedPassword +"','VERIFIED')");
+	        st.executeUpdate("INSERT INTO auth_user_role(auth_user_id,auth_role_id) VALUES (6,1)");
 	        st.executeUpdate("INSERT INTO role(role_id,role_desc,role_name)VALUES(1,'ADMIN_USER','ADMIN_USER')");
 	        st.executeUpdate("INSERT INTO role(role_id,role_desc,role_name)VALUES(2,'SITE_USER','SITE_USER')");
-	        st.executeQuery("select u.email, r.role_name from user u inner join auth_user_role ur on(u.user_id=ur.auth_user_id) inner join role r on(ur.auth_role_id=r.role_id)");
+//	        st.executeQuery("select u.email, r.role_name from user u inner join auth_user_role ur on(u.user_id=ur.auth_user_id) inner join role r on(ur.auth_role_id=r.role_id)");
 
 	        conn.close();
 		} catch (Exception e) { 
