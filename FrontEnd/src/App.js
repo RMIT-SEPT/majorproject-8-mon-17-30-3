@@ -3,7 +3,8 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom'
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Header from './components/Layout/Header';
-import Booking from './components/Booking';
+import ViewBooking from './components/ViewBooking';
+import MakeBooking from './components/MakeBooking';
 import Home from './components/Home';
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home}></Route>
-        <Route path="/Booking" exact component={Booking}></Route>
+        <Route path="/ViewBooking" exact component={ViewBooking}></Route>
+        <Route path="/MakeBooking" exact component={MakeBooking}></Route>
       </Switch>
       
     </BrowserRouter>

@@ -6,7 +6,10 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <Link to="/Booking">Booking</Link>
+                <ul>
+                    <li><Link to="/ViewBooking">View All Bookings</Link></li>
+                    <li><Link to="/MakeBooking">Make a Booking</Link></li>
+                </ul>
             </div>
         )
     }
