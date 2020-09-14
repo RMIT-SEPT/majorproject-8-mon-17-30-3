@@ -34,6 +34,14 @@ public class Company {
 		this.service_name = service_name;
 		
 	}
+	
+	public Company(String company_name) {
+		this.company_name = company_name;
+	}
+	
+	public String getCompanyName() {
+		return company_name;
+	}
 
 
 }

@@ -1,27 +1,26 @@
 package rmit.com.sept.sept.controller;
 
-import java.util.Map;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
-
 import rmit.com.sept.sept.Booking;
+import rmit.com.sept.sept.Company;
 import rmit.com.sept.sept.User;
+import rmit.com.sept.sept.Worker;
 import rmit.com.sept.sept.service.BookingService;
 import rmit.com.sept.sept.service.UserService;
+import rmit.com.sept.sept.service.WorkerService;
+
+import javax.validation.Valid;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AuthenticationController {
@@ -32,6 +31,9 @@ public class AuthenticationController {
 	@Autowired
 	BookingService bookingService;
 	
+	@Autowired
+	WorkerService workerService;
+	
 	private int userId;
 	
 	
@@ -39,8 +41,6 @@ public class AuthenticationController {
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
-		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println(currentUserName);
 		modelAndView.setViewName("login"); // resources/template/login.htm
 		return modelAndView;
 	}
@@ -54,14 +54,34 @@ public class AuthenticationController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "/registerWorker", method = RequestMethod.GET)
+	public ModelAndView registerWorker(Model model) throws SQLException {
+		ModelAndView modelAndView = new ModelAndView();
+		Worker worker = new Worker();
+		 List<Company> listCat  = workerService.list();
+		 model.addAttribute("listCat",listCat);
+		modelAndView.addObject("worker", worker);
+		modelAndView.setViewName("registerWorker"); // resources/template/registerWorker.html
+		return modelAndView;
+	}
+	
 	@RequestMapping(value = "/createBooking", method = RequestMethod.GET)
 	public ModelAndView booking() {
+		
 		ModelAndView modelAndView = new ModelAndView();
 		Booking booking = new Booking();
 		modelAndView.addObject("booking", booking);
 		modelAndView.setViewName("createBooking"); // resources/template/register.html
 		return modelAndView;
 	}
+	
+	   @ModelAttribute("companyList")
+	   public List<Company> getNumbersList() throws SQLException {
+	      List<Company> companyList = workerService.list();
+	      System.out.println(companyList.size());
+	      return companyList;
+	   }
+
 
 	
 	
@@ -95,7 +115,7 @@ public class AuthenticationController {
 			modelAndView.addObject("successMessage", "Please correct the errors in form!");
 			modelMap.addAttribute("bindingResult", bindingResult);
 		}
-		else if(userService.isUserPresent(user)){
+		else if(userService.isUserPresent(user.getId())){
 			modelAndView.addObject("successMessage", "user already exists!");			
 		}
 		// we will save the user if, no binding errors
@@ -104,6 +124,30 @@ public class AuthenticationController {
 			modelAndView.addObject("successMessage", "User is registered successfully!");
 		}
 		modelAndView.addObject("user", new User());
+		
+		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/registerWorker", method=RequestMethod.POST)
+	public ModelAndView registerWorker2(@Valid Worker worker, BindingResult bindingResult, ModelMap modelMap) {
+		ModelAndView modelAndView = new ModelAndView();
+		// Check for the validations
+		if(bindingResult.hasErrors()) {
+			modelAndView.addObject("successMessage", "Please correct the errors in form!");
+			modelMap.addAttribute("bindingResult", bindingResult);
+		}
+		
+		
+//		else if(userService.isUserPresent(user)){
+//			modelAndView.addObject("successMessage", "user already exists!");			
+//		}
+//		// we will save the user if, no binding errors
+//		else {
+//			userService.saveUser(user);
+//			modelAndView.addObject("successMessage", "User is registered successfully!");
+//		}
+//		modelAndView.addObject("user", new User());
 		
 		modelAndView.setViewName("login");
 		return modelAndView;
@@ -149,6 +193,36 @@ public class AuthenticationController {
 
         return "bookings";
     }
+
+	@RequestMapping(value = "/user{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public User getUser(@PathVariable Integer id){
+
+		if(userService.isUserPresent(id)){
+			Optional<User> optional = userService.getUserRepository().findById(id);
+			User myUser = optional.get();
+			//userMap.put(id, userResponse);
+			return myUser;
+		}
+		else{
+			throw new RuntimeException("User doesn't exists");
+		}
+	}
+
+	@RequestMapping(value = "/booking{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public Booking getBooking(@PathVariable Integer id){
+
+		if(bookingService.isBookingPresent(id)){
+			Optional<Booking> optional = bookingService.getBookingRepository().findById(id);
+			Booking myBooking = optional.get();
+			//userMap.put(id, userResponse);
+			return myBooking;
+		}
+		else{
+			throw new RuntimeException("Booking doesn't exists");
+		}
+	}
 
 }
 
