@@ -1,21 +1,20 @@
 package rmit.com.sept.sept.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import rmit.com.sept.sept.Role;
+import rmit.com.sept.sept.User;
+import rmit.com.sept.sept.repository.RoleRepository;
+import rmit.com.sept.sept.repository.UserRepository;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.HashSet;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import rmit.com.sept.sept.Role;
-import rmit.com.sept.sept.User;
-import rmit.com.sept.sept.repository.RoleRepository;
-import rmit.com.sept.sept.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,8 +41,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isUserPresent(User user) {
+	public boolean isUserPresent(int id) {
 		// TODO Auto-generated method stub
+		if(userRepository.existsById(id)){
+			return true;
+		}		//return false;
 		return false;
 	}
 
@@ -78,6 +80,11 @@ public class UserServiceImpl implements UserService {
 		
 		return intId;
 		
+	}
+
+	public UserRepository getUserRepository(){
+		return this.userRepository;
+
 	}
 
 

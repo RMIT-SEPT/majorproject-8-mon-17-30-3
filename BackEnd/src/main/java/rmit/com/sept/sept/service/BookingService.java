@@ -1,9 +1,10 @@
 package rmit.com.sept.sept.service;
 
-import java.util.List;
-
 import rmit.com.sept.sept.Booking;
 import rmit.com.sept.sept.Company;
+import rmit.com.sept.sept.repository.BookingRepository;
+
+import java.util.List;
 
 public interface BookingService {
 	public void createBooking(Booking booking);
@@ -11,4 +12,8 @@ public interface BookingService {
 	public List<Company> findAllCompany(String service_name);
 	
 	public List<Booking> getAllBookings();
+
+	public boolean isBookingPresent(int id);
+
+	public BookingRepository getBookingRepository();
 }
