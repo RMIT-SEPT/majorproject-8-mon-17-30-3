@@ -16,4 +16,6 @@ public interface BookingService {
 	public boolean isBookingPresent(int id);
 
 	public BookingRepository getBookingRepository();
+
+	public void deleteBooking(int id);
 }

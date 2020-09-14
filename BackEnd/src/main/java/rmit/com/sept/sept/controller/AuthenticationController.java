@@ -34,7 +34,7 @@ public class AuthenticationController {
 	@Autowired
 	WorkerService workerService;
 	
-	private int userId;
+	public int userId;
 	
 	
 
@@ -49,7 +49,9 @@ public class AuthenticationController {
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
+//		Company company = new Company();
 		modelAndView.addObject("user", user);
+//		modelAndView.addObject("company", company);
 		modelAndView.setViewName("register"); // resources/template/register.html
 		return modelAndView;
 	}
@@ -108,7 +110,7 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public ModelAndView registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
+	public ModelAndView registerUser(@Valid User user,BindingResult bindingResult, ModelMap modelMap) {
 		ModelAndView modelAndView = new ModelAndView();
 		// Check for the validations
 		if(bindingResult.hasErrors()) {
@@ -121,9 +123,12 @@ public class AuthenticationController {
 		// we will save the user if, no binding errors
 		else {
 			userService.saveUser(user);
+//			userService.saveCompany(company);
 			modelAndView.addObject("successMessage", "User is registered successfully!");
 		}
+		
 		modelAndView.addObject("user", new User());
+//		modelAndView.addObject("company", new Company());
 		
 		modelAndView.setViewName("login");
 		return modelAndView;
@@ -193,6 +198,22 @@ public class AuthenticationController {
 
         return "bookings";
     }
+	
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(Model md){
+		System.out.println("profile" + userId);
+        md.addAttribute("user", userService.getUserDetails(userId));
+
+        return "profile";
+    }
+	
+	
+	@RequestMapping(value = "/booking/{id}", method = RequestMethod.DELETE)
+    public String deleteBooking(@PathVariable int id){
+        bookingService.deleteBooking(id);
+        return "bookings";
+        
+    }
 
 	@RequestMapping(value = "/user{id}", method=RequestMethod.GET)
 	@ResponseBody
@@ -223,6 +244,8 @@ public class AuthenticationController {
 			throw new RuntimeException("Booking doesn't exists");
 		}
 	}
+	
+	
 
 }
 

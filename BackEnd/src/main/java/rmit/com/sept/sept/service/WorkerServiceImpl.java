@@ -1,22 +1,15 @@
 package rmit.com.sept.sept.service;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale.Category;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import rmit.com.sept.sept.Company;
 import rmit.com.sept.sept.Worker;
-
 import rmit.com.sept.sept.repository.WorkerRepository;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
@@ -35,9 +28,9 @@ public class WorkerServiceImpl implements WorkerService {
 	@Override
 	public List<Company> list() throws SQLException {
         List<Company> listCategory = new ArrayList<>();
-        String url = "jdbc:mysql://localhost:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+        String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
         String user = "root";
-        String password = "ronaldo7!!";
+        String password = "KG@7291979369";
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT company_name FROM company";
             Statement statement = connection.createStatement();

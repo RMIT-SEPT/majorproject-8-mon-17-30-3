@@ -70,6 +70,14 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
+	public void deleteBooking(int id) {
+//		String iaa = "2";
+//		int i=Integer.parseInt(iaa);  
+		List<Booking> b = getAllBookings();
+		b.removeIf(t -> t.getBookingId() == (id));
+	}
+
+	@Override
 	public boolean isBookingPresent(int id) {
 		// TODO Auto-generated method stub
 		if(bookingRepository.existsById(id)){
