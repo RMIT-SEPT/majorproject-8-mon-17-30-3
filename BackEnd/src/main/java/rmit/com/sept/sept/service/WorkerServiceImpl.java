@@ -35,7 +35,7 @@ public class WorkerServiceImpl implements WorkerService {
 	@Override
 	public List<Company> list() throws SQLException {
         List<Company> listCategory = new ArrayList<>();
-        String url = "jdbc:mysql://localhost:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+        String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
         String user = "root";
         String password = "ronaldo7!!";
         try (Connection connection = DriverManager.getConnection(url, user, password)) {

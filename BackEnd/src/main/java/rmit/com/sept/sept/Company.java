@@ -28,10 +28,17 @@ public class Company {
 	@Column(name = "service_name")
 	public String service_name;
 	
+	@Column(name = "number")
+	public String number;
+	
 	public Company(int company_id,String company_name, String service_name) {
 		this.company_id = company_id;
 		this.company_name = company_name;
 		this.service_name = service_name;
+		
+	}
+	
+	public Company() {
 		
 	}
 	

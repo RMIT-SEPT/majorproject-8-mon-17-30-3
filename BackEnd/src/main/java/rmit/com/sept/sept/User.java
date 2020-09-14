@@ -53,18 +53,54 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-
+	@Column(name = "isCompany")
+	private boolean isCompany;
+	
 	@Column(name = "status")
 	private String status;
+	
+//	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "company_id")
+	public int company_id;
+
+
+//	@NotNull(message="Company name is compulsory")
+	@Column(name = "company_name")
+	public String company_name;
+
+//	@NotNull(message="Service name is compulsory")
+	@Column(name = "service_name")
+	public String service_name;
+	
+	@Column(name = "number")
+	public String number;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
 	private Set<Role> roles;
+	
+	public User(String firstname, String lastname, String email) {
+		this.name = firstname;
+		this.lastName = lastname;
+		this.email = email;
+	}
+	
+	public User() {
+		
+	}
 
 	public int getId() {
 		return id;
 	}
 
+	public boolean getIsCompany() {
+		return isCompany;
+	}
+	
+	public void setIsCompany(boolean isCompany) {
+		this.isCompany = isCompany;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -72,9 +108,32 @@ public class User {
 	public String getName() {
 		return name;
 	}
+	
+	public String getCompanyName() {
+		return company_name;
+	}
+	
+	public String getServiceName() {
+		return service_name;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setCompanyName(String company_name) {
+		this.company_name = company_name;
+	}
+	public void setServiceName(String service_name) {
+		this.service_name = service_name;
+	}
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getLastName() {
