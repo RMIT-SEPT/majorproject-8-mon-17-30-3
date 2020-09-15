@@ -1,44 +1,25 @@
 import React, { Component } from 'react'
-import './CSS/homeStyle.css'
-import logo from './CSS/logo.png'
+import {Link} from 'react-router-dom'
+import "./styles.css"
 
-class Home extends Component {
-
-        render() {
+export default class Home extends Component {
+    render() {
         return (
-            <div className="Home">
-             <head>  
-              
-                   <title>Welcome to Agme</title>
-              
-                   </head> 
-              <body>
-                  <header>
-                      <div className="wrapper">
-                          <div className="logo">
-                          <img src={logo} alt="">
-                          </img>
-                              </div>
-                             
-                          </div>
-                          <ul className="nav-area">
-                              
-                              <li><a href="Home">AGME</a></li>
-                              <li><a href="AdminHome">ABOUT US</a></li>
-                              <li><a href="/Login">LOGIN</a></li>
-                              <li><a href="/Register">REGISTER</a></li>
-                              </ul>
-                              <div className="welcome-text">
-                                  <h1> 
-                                      WELCOME TO AGME
-                                      </h1>
-                                  </div>
-                      </header>
-
-              </body>
+            <div className="Persons">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <h1 className="display-4 text-center">Bookings</h1>
+                        <ul>
+                            <a button type="button" class="btn btn-primary" href="/ViewBooking">View All Bookings</a>
+                            <br />
+                            <br />
+                            <a button type="button" class="btn btn-primary" href="/MakeBooking">Make a Booking</a>
+                        </ul>
+                    </div>
+                </div>
             </div>
-
+        </div>
         )
     }
 }
-export default Home

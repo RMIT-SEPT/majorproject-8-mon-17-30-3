@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './CSS/style.css'
-import loginImg from '../Components/avatar.png'
+import './styles.css'
+import loginImg from './Images/avatar.png'
 
 class Login extends Component {
     constructor(props) {
@@ -48,14 +48,14 @@ class Login extends Component {
         return (
             <div className="loginbox">
                 <img src={loginImg} class="avatar"></img>
-                <form onSubmit={this.handleSubmit}>
-               <h1>AGME LOGIN</h1>
-                    <p>UserName </p> <input type="text" value={this.state.username} onChange={this.userNamehandler} placeholder="Username" required /><br />
-                    <p>Password</p> <input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" required /><br />
-                    <br/><input type="submit" value="Sign in" /> 
-                    <a href="/Register">Create Account</a><br></br><br></br>
-                    <a href="/Home"> Home</a>
-            </form>        
+                    <form onSubmit={this.handleSubmit}>
+                        <h1>AGME Login</h1>
+                            <p>Username </p> <input type="text" value={this.state.username} onChange={this.userNamehandler} placeholder="Username" required /><br />
+                            <p>Password</p> <input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" required /><br />
+                        <br/><input type="submit" value="Sign in" /><br/>
+                            <a href="/Register">Create Account</a><br/><br/>
+                            <a href="/Home"> Home</a>
+                    </form>        
             </div>
 
         )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import loginImg from '../Components/avatar.png'
-import './CSS/todo.css'
+import loginImg from './Images/avatar.png'
+import './styles.css'
 
 
 class Register extends Component {
@@ -58,14 +58,14 @@ class Register extends Component {
 
 render() {
         return (
-            <div className="registerBox">
+            <div className="loginbox">
                 <img src={loginImg} class="avatar"></img>
                 <form onSubmit={this.handleSubmit}>
-                    <h1>CREATE AGME ACCOUNT</h1>
-                    <p>UserName </p> <input type="text" value={this.state.username} onChange={this.userNamehandler} placeholder="Username" required /><br />
+                    <h2>Create an AGME Account</h2>
+                    <p>Username </p> <input type="text" value={this.state.username} onChange={this.userNamehandler} placeholder="Username" required /><br />
                     <p>Email</p> <input type="text" value={this.state.email} onChange={this.emailhandler} placeholder="Email"  required/><br />
-                    <p>FirstName</p> <input type="text" value={this.state.firstName} onChange={this.firsthandler} placeholder="FirstName"  required/><br />
-                    <p>LastName</p> <input type="text" value={this.state.lastName} onChange={this.lasthandler} placeholder="LastName"  required/><br />
+                    <p>First Name</p> <input type="text" value={this.state.firstName} onChange={this.firsthandler} placeholder="FirstName"  required/><br />
+                    <p>Last Name</p> <input type="text" value={this.state.lastName} onChange={this.lasthandler} placeholder="LastName"  required/><br />
                     <p>Password</p> <input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" required /><br />
                     <br/><input type="submit" value="Register Account" />
                     <a href="Login">Back to Login</a><br></br><br></br>
