@@ -11,7 +11,7 @@ export default class ViewBooking extends Component {
 
   }
   componentDidMount() {
-    axios.get('http://localhost:8080/api/booking/all').then(response => {this.setState({booking: response.data})});
+    axios.get('http://localhost:8080/bookings').then(response => {this.setState({booking: response.data})});
   }
 
   deleteRow(id,e){

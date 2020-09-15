@@ -1,51 +1,45 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import BookingService from './services/BookingService'
 
 class MakeBooking extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state= {
-        name: "", 
-        personIdentifier: "",
-        desc: "",
-        start_date: "",
-        end_date: "" 
-    }; 
-
-         {/* should be :
-            this.state= {
             user_id: "",
-            serviceName: "",
+            servicename: "",
             workerName: "",
             status: "",
             date: "",
             time: ""    
-            }
-        */}
+            }; 
 
     this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    
+    this.makeBooking = this.makeBooking.bind(this);
         }
 
     onChange(e){
         this.setState({[e.target.name]: e.target.value});
     }
-    onSubmit(e){
-        e.preventDefault();
-        const newPerson = {
-            name: this.state.name,
-            personIdentifier: this.state.personIdentifier,
-            desc: this.state.desc,
-            start_date:this.state.start_date,
-            end_date: ""
-        }
 
-        console.log(newPerson);
-        axios.post("http://localhost:8080/api/booking/",newPerson);
-        this.props.history.push('/')
+    makeBooking = (e) => {
+        e.preventDefault();
+        let booking = {
+            user_id: this.state.user_id,
+            servicename: this.state.servicename,
+            workerName: this.state.workerName,
+            status:this.state.status,
+            date: this.state.date,
+            time: this.state.time,
+        };
+
+        console.log('booking => ' + JSON.stringify(booking));
+
+        BookingService.createBooking(booking).then(res =>{
+            this.props.history.push('/ViewBooking');
+        });
     }
+
     render() {
         return (
             <div>
@@ -59,63 +53,59 @@ class MakeBooking extends Component {
 
                             <div className="form-group">
                             <input type="text" className="form-control form-control-lg " 
-                            placeholder="UserID" 
-                            name="personIdentifier"
-                            value= {this.state.personIdentifier}
+                            placeholder="User ID" 
+                            name="user_id"
+                            value= {this.state.user_id}
                             onChange = {this.onChange}
                             />
-                            
                             </div>
-
-
 
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg " 
                                 placeholder="Service Name" 
-                                name="desc"
-                                value= {this.state.desc}
+                                name="servicename"
+                                value= {this.state.servicename}
                                 onChange = {this.onChange}
-                                />
-                                
+                                />  
                             </div>
+
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Worker Name"
-                                name="name"
-                                value= {this.state.name}
+                                name="workerName"
+                                value= {this.state.workerName}
                                 onChange = {this.onChange}
                                     />
                             </div>
                           
                             <div className="form-group">
-                                <input className="form-control form-control-lg"placeholder="Status"></input> 
-                                
-                                {/*name = "desc"
-                                value= {this.state.desc}
+                                <input type="text" className="form-control form-control-lg" 
+                                placeholder="Status"
+                                name="status"
+                                value= {this.state.status}
                                 onChange = {this.onChange}
-                                />*/}
-                                
-
+                                    />
                             </div>
+
                             <h6>Date</h6>
                             <div className="form-group">
                                 <input type="date" className="form-control form-control-lg" 
-                                name="start_date"
-                                value= {this.state.start_date}
+                                name="date"
+                                value= {this.state.date}
                                 onChange = {this.onChange}
                                 />
                             </div>
+
                             <h6>Time</h6>
                             <div className="form-group">
-                                <input type="time" className="form-control form-control-lg" ></input>
-                                {/*name="end_date"*/} 
-                                {/*value= {this.state.end_date}*/}
-                                {/*onChange = {this.onChange}*/}
-                                {/*/>*/}
-
+                                <input type="time" className="form-control form-control-lg"
+                                name="time"
+                                value= {this.state.time}
+                                onChange = {this.onChange}
+                                />
                             </div>
     
-                            <input type="submit" className="btn btn-primary btn-block mt-4" />
+                            <button className="btn btn-primary btn-block mt-4" onClick={this.makeBooking}>Make Booking</button>
                         </form>
                     </div>
                 </div>
