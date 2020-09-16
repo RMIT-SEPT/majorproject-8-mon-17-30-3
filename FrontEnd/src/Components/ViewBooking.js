@@ -15,7 +15,7 @@ export default class ViewBooking extends Component {
   }
 
   deleteRow(id,e){
-   const url = 'http://localhost:8080/api/booking/'
+   const url = 'http://localhost:8080/bookings'
    axios.delete(url+id).then(response => {this.setState({booking: response.data})});
    this.props.history.push('/')
 
@@ -23,20 +23,26 @@ export default class ViewBooking extends Component {
 
   render() {
     return (
-      <div className="box">
-        <h1>View Bookings</h1>
-        <table>
-          <tr>
-            <th>BookingID</th>
-            <th>UserID</th>
-            <th>Service</th>
-            <th>Worker</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Delete</th>
-          </tr>
-          <tbody>
+      <div>
+          <div className="box">
+            <div className="col-md-8 m-auto">
+              <div className="row">
+                <h5 className="display-4 text-center">Upcoming Bookings</h5>
+                <hr/>
+              </div>
+              <div className="row">
+                <table>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>User ID</th>
+                    <th>Service</th>
+                    <th>Worker</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Delete</th>
+                  </tr>
+                  <tbody>
           {
               this.state.booking.map(
                   booking =>
@@ -48,14 +54,17 @@ export default class ViewBooking extends Component {
                           <td>{booking.end_date}</td>{/* booking.status*/}
                           <td>{booking.created_At}</td>{/* booking.date*/}
                           <td>12:00</td>{/* booking.time*/}
-                          <td><button className="btn btn-danger" onClick={(e) => this.deleteRow(booking.personIdentifier, e)}>Delete</button></td>
                       </tr>
               )
           }
-      </tbody>
-        </table>
-
-        <a className="btn btn-success" href="/MakeBooking">Make a Booking</a>
+                  </tbody>
+                </table>
+            </div>
+            <div className="row">
+              <a className="btn btn-success" href="/MakeBooking">Make a Booking</a>
+            </div>
+          </div>
+        </div>
       </div>
 
       

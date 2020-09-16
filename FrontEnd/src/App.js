@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter,Route,Switch} from 'react-router-dom'
 import './App.css';
+import './Components/CSS/style.css';
 import Dashboard from './Components/Dashboard';
 import Header from './Components/Layout/Header';
 import Footer from './Components/Layout/Footer';

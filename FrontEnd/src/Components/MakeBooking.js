@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BookingService from './services/BookingService'
+import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
 class MakeBooking extends Component {
     constructor(props){
@@ -106,6 +107,7 @@ class MakeBooking extends Component {
                             </div>
     
                             <button className="btn btn-primary btn-block mt-4" onClick={this.makeBooking}>Make Booking</button>
+                            <Link to="/Dashboard" className="btn btn-danger btn-block mt-4">Cancel</Link>
                         </form>
                     </div>
                 </div>
