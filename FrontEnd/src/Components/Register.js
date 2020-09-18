@@ -11,6 +11,9 @@ class Register extends Component {
         name: "",
         lastName: "",
         password: "",
+        companyName: "",
+        serviceName: "",
+        number: "",
         isRegistered: false,
         show: true
     };
@@ -35,7 +38,25 @@ class Register extends Component {
             password: event.target.value
         });
     };
+
+    companyNameHandler = (event) => {
+        this.setState({
+            companyName: event.target.value
+        });
+    };
+
+    serviceNameHandler = (event) => {
+        this.setState({
+            serviceName: event.target.value
+        });
+    };
     
+    mobileHandler = (event) => {
+        this.setState({
+            number: event.target.value
+        });
+    };
+
     handleSubmit = e => {
         e.preventDefault();
         const customer = {
@@ -43,6 +64,9 @@ class Register extends Component {
             lastName: this.state.lastName,
             email: this.state.email,
             password: this.state.password,
+            companyName: this.state.companyName,
+            serviceName: this.state.serviceName,
+            number: this.state.number,
         };
         axios
             .post("http://localhost:8080/createUser", customer)
@@ -61,7 +85,7 @@ class Register extends Component {
         
           operation(){
               this.setState({
-                  show:false
+                  show:!this.state.show
               })
           }
 
@@ -102,34 +126,35 @@ class Register extends Component {
                         onChange={this.passwordhandler}
                         placeholder="Password" required /><br />
 
-                    <p>Do You Want To Register as a company</p><br />
-                    <p>Yes</p><input type="radio" onclick={()=>this.operationTrue()} name="yesCheck" id="yesCheck" />
-                    <p>No</p><input type="radio" onclick={this.handleField} name="yesCheck" id="yesCheck" />
-                   
-                   {this.state.show?
+                    {this.state.show?
                     <div className="ifYes" >
 
                         <input type="text"
-                            field="*{companyName}"
+                            value={this.state.companyName}
+                            onChange={this.companyNameHandler}
                             placeholder="Company name"
                             class="form-control" />
 
                         <input type="text"
-                            field="*{serviceName}"
+                            value={this.state.serviceName}
+                            onChange={this.serviceNameHandler}
                             placeholder="Service name"
                             class="form-control" />
 
                         <input type="text"
-                            field="*{number}"
+                            value={this.state.number}
+                            onChange={this.mobileHandler}
                             placeholder="Number"
                             class="form-control" />
                
                     </div>
                     :null
                     }
+                    {/* <p>Do You Want To Register as a company</p><br /> */}
+                    
                     
                     <br /><input type="submit" value="Register Account" />
-
+                    <button onClick={()=>this.operation()} >Register Company</button>
                     <a href="Login">Back to Login</a><br></br><br></br>
                     <a href="Home">Home</a>
                 </form>
