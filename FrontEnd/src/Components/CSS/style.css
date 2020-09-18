@@ -11,6 +11,10 @@ body{
     background-position: bottom;
     font-family: sans-serif;
   }
+
+thead {
+  border: none !important;
+}
   .loginbox{
     width: 320px;
     height: 400px;
@@ -23,6 +27,7 @@ body{
     box-sizing: border-box;
     padding: 70px 30px;
   }
+
   .avatar{
     width: 100px;
     height: 100px;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BookingService from './services/BookingService'
 import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
-
+import axios from 'axios';
 class MakeBooking extends Component {
     constructor(props){
         super(props);
@@ -44,14 +44,13 @@ class MakeBooking extends Component {
     render() {
         return (
             <div>
-            <div className="box">
+             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8 m-auto">
-                        <h5 className="display-4 text-center">Make a new booking</h5>
+                        <h5 className="display-4 text-center">Make a New Booking</h5>
                         <hr />
+
                         <form onSubmit={this.onSubmit}>
-
-
                             <div className="form-group">
                             <input type="text" className="form-control form-control-lg " 
                             placeholder="User ID" 

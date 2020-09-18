@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./styles.css";
 import axios from 'axios';
 import DataService from './DataService.js';
 import { Link } from "react-router-dom";
@@ -24,44 +23,45 @@ export default class ViewBooking extends Component {
   render() {
     return (
       <div>
-          <div className="box">
+          <div className="container-fluid">
             <div className="col-md-8 m-auto">
               <div className="row">
-                <h5 className="display-4 text-center">Upcoming Bookings</h5>
-                <hr/>
-              </div>
-              <div className="row">
-                <table>
+                <h5 className="display-4 align-middle">Upcoming Bookings</h5>
+                <hr/>        
+
+                <table className="table">
+                  <thead>
                   <tr>
-                    <th>Booking ID</th>
-                    <th>User ID</th>
-                    <th>Service</th>
-                    <th>Worker</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Delete</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">Booking Number</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">User ID</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">Service</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">Worker</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">Status</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">Date</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">Time</th>
+                    <th className="bg-dark text-white text-center align-middle" scope="col">Delete</th>
                   </tr>
+                  </thead>
                   <tbody>
           {
               this.state.booking.map(
                   booking =>
-                      <tr key={booking.id}> {/* booking.booking_id*/}
-                          <td>{booking.id}</td>{/* booking.booking_id*/}
-                          <td>{booking.personIdentifier}</td>{/* booking.user_id*/}
-                          <td>{booking.desc}</td>{/* booking.serviceName*/}
-                          <td>{booking.name}</td>{/* booking.workerName*/}
-                          <td>{booking.end_date}</td>{/* booking.status*/}
-                          <td>{booking.created_At}</td>{/* booking.date*/}
-                          <td>12:00</td>{/* booking.time*/}
+                      <tr key={booking.booking_id}>
+                          <th scope="row">{booking.booking_id}</th>
+                          <td>{booking.user_id}</td>
+                          <td>{booking.serviceName}</td>
+                          <td>{booking.workerName}</td>
+                          <td>{booking.status}</td>
+                          <td>{booking.date}</td>
+                          <td>{booking.time}</td>
                       </tr>
               )
           }
                   </tbody>
                 </table>
-            </div>
+              </div>
             <div className="row">
-              <a className="btn btn-success" href="/MakeBooking">Make a Booking</a>
+              <a className="btn btn-primary btn-block mt-2" href="/MakeBooking">Make a Booking</a>
             </div>
           </div>
         </div>
