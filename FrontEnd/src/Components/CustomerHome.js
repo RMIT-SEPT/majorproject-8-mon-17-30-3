@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import './CSS/AdminHome.css'
+import './CSS/homeStyle.css'
 import logo from './CSS/logo.png'
 
-class AdminHome extends Component {
+class CustomerHome extends Component {
 
         render() {
         return (
@@ -22,14 +22,13 @@ class AdminHome extends Component {
                              
                           </div>
                           <ul className="nav-area">
-                              <li><a href="Home">AGME</a></li>
-                              <li><a href="/Login">Logout</a></li>
+                              <li><a href="/Home">AGME</a></li>
+                              <li><a href="/Login">LOGOUT</a></li>
                               </ul>
                               <div className="welcome-text">
                                   <h1> 
-                                  <a href="#">Assign Tasks</a><br></br>
-                                  <a href="#">View Bookings</a><br></br>
-                                  <a href="#">Calendar</a><br></br>
+                                  <a href="#">View Past Bookings</a><br></br>
+                                  <a href="CreateBooking">Create a Booking</a><br></br>
                                   <a href="#">View Details</a><br></br>
                                       </h1>
                                   </div>
@@ -41,4 +40,4 @@ class AdminHome extends Component {
         )
     }
 }
-export default AdminHome
+export default CustomerHome
