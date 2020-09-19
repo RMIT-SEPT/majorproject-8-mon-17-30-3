@@ -5,7 +5,7 @@ import React, { Component } from 'react'
         return (
         <div>
             <div className="footer">
-                <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-primary">
+                <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
                     <div className="container">    
                         <div className="collapse navbar-collapse" id="mobile-nav">
                             <ul className="navbar-nav mr-auto">

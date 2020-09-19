@@ -99,7 +99,7 @@ class Register extends Component {
 
         
         return (
-            <div className="registerBox col-md-5 align-items-center">
+            <div className="registerBox col-md-4 align-items-center bg-dark">
              <div className="container-fluid">
                 <img src={loginImg} class="avatar"></img>
                 <form onSubmit={this.handleSubmit}>
@@ -154,13 +154,18 @@ class Register extends Component {
                     }
                     {/* <p>Do You Want To Register as a company</p><br /> */}
                     
-                    
-                    <br /><input className="btn btn-danger btn-block mt-2" type="submit" value="Register Account" />
+                    <br />
+                    <input className="btn btn-success btn-block mt-2" type="submit" value="Register Account" />
                     <button className="btn btn-primary btn-block mt-2" onClick={()=>this.operation()} >Register as a company</button>
-                    <div class="btn-toolbar col-lg-12">
-                        <button href="Login" class="btn btn-success mx-auto" role="button">Login</button>
-                        <button href="Home" class="btn btn-success mx-auto" role="button">Home</button>
-                    </div>
+                    <br />    
+                    <div className="row">
+                            <div className="col">
+                                <button href="Register" class="btn btn-block btn-danger" role="button">Login</button>
+                            </div>
+                            <div className="col">
+                                <button href="Home" class="btn btn-block btn-primary" role="button">Home</button>
+                            </div>
+                        </div>
                 </form>
 
             </div>

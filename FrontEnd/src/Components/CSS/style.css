@@ -12,6 +12,9 @@ body{
     font-family: sans-serif;
   }
 
+h1 {
+  color: white;
+}
 thead {
   border: none !important;
 }

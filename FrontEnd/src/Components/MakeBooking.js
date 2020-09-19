@@ -43,15 +43,15 @@ class MakeBooking extends Component {
 
     render() {
         return (
-            <div>
              <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-8 m-auto">
-                        <h5 className="display-4 text-center">Make a New Booking</h5>
+                    <div className="content-box col-md-8 m-auto">
+                        <h5 className="pageTitle display-4 text-center">Make a New Booking</h5>
                         <hr />
 
-                        <form onSubmit={this.onSubmit}>
+                        <form className="booking-form" onSubmit={this.onSubmit}>
                             <div className="form-group">
+                            <h6>ID</h6>
                             <input type="text" className="form-control form-control-lg " 
                             placeholder="User ID" 
                             name="user_id"
@@ -60,6 +60,7 @@ class MakeBooking extends Component {
                             />
                             </div>
 
+                            <h6>Service</h6>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg " 
                                 placeholder="Service Name" 
@@ -69,6 +70,7 @@ class MakeBooking extends Component {
                                 />  
                             </div>
 
+                            <h6>Worker</h6>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Worker Name"
@@ -78,6 +80,7 @@ class MakeBooking extends Component {
                                     />
                             </div>
                           
+                            <h6>Status</h6>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Status"
@@ -105,13 +108,12 @@ class MakeBooking extends Component {
                                 />
                             </div>
     
-                            <button className="btn btn-primary btn-block mt-4" onClick={this.makeBooking}>Make Booking</button>
+                            <button className="btn btn-success btn-block mt-4" onClick={this.makeBooking}>Make Booking</button>
                             <Link to="/Dashboard" className="btn btn-danger btn-block mt-4">Cancel</Link>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
         )
     }
 }

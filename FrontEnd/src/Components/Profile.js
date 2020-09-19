@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 class Profile extends Component {
     render() {
     return (
-        <div>
-        <div className="container-fluid">
-          <div className="col-md-8 m-auto">
-            <div className="row">
-              <h5 className="display-4 text-center">Profile</h5>
-              <hr/>        
+      <div>
+      <div className="container-fluid">
+         <div className="row">
+             <div className="col-md-8 m-auto">
+                 <h5 className="pageTitle display-4 text-center">Your Profile</h5>
+                 <hr />
             
               <table className="table">
                 <thead>
@@ -26,14 +26,14 @@ class Profile extends Component {
                     <td className="bg-light text-dark">Johnson</td>
                 </tbody>
               </table>
-            </div>
           <div className="row">
-            <a className="btn btn-primary btn-block mt-2" href="/">Edit Profile</a>
+            <a className="btn btn-success btn-block mt-2" href="/">Edit Profile</a>
           </div>
         </div>
       </div>
     </div>
 
+    </div>
     
       )
     }

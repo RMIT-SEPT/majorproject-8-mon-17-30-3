@@ -5,7 +5,7 @@ import logo from '../Images/logo.png'
     render() {
         return (
         <div>
-            <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+            <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                 <div className="container">
                     <a className="navbar-brand" href="/Home"><img className="logo" src={logo} alt=""/></a>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">

@@ -23,23 +23,23 @@ export default class ViewBooking extends Component {
   render() {
     return (
       <div>
-          <div className="container-fluid">
-            <div className="col-md-8 m-auto">
-              <div className="row">
-                <h5 className="display-4 align-middle">Upcoming Bookings</h5>
-                <hr/>        
+      <div className="container-fluid">
+         <div className="row">
+             <div className="col-md-8 m-auto">
+                 <h5 className="pageTitle display-4 text-center">Your Upcoming Bookings</h5>
+                 <hr />
 
                 <table className="table">
                   <thead>
                   <tr>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">Booking Number</th>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">User ID</th>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">Service</th>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">Worker</th>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">Status</th>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">Date</th>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">Time</th>
-                    <th className="bg-dark text-white text-center align-middle" scope="col">Delete</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">Booking Number</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">User ID</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">Service</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">Worker</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">Status</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">Date</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">Time</th>
+                    <th className="bg-light text-dark text-center align-middle" scope="col">Delete</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -59,14 +59,13 @@ export default class ViewBooking extends Component {
           }
                   </tbody>
                 </table>
+              <div className="row">
+                <a className="btn btn-success btn-block mt-2" href="/MakeBooking">Make a Booking</a>
               </div>
-            <div className="row">
-              <a className="btn btn-primary btn-block mt-2" href="/MakeBooking">Make a Booking</a>
             </div>
           </div>
         </div>
-      </div>
-
+        </div>
       
     );
   }

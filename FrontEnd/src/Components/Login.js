@@ -45,7 +45,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="registerBox col-md-5 align-items-center">
+            <div className="registerBox col-md-4 align-items-center bg-dark">
              <div className="container-fluid">
                 <img src={loginImg} class="avatar"></img>
                     <form onSubmit={this.handleSubmit}>
@@ -62,10 +62,14 @@ class Login extends Component {
                                 onChange={this.passwordhandler} 
                                 placeholder="Password" required/>
                                 
-                        <input className="btn-success" type="submit" value="Sign in" />
-                        <div class="btn-toolbar col-lg-12">
-                            <button href="Register" class="btn btn-success mx-auto" role="button">Register</button>
-                            <button href="Home" class="btn btn-success mx-auto" role="button">Home</button>
+                        <input className="btn btn-success btn-block mt-4" type="submit" value="Sign in" />
+                        <div className="row">
+                            <div className="col">
+                                <button href="Register" class="btn btn-block btn-danger" role="button">Register</button>
+                            </div>
+                            <div className="col">
+                                <button href="Home" class="btn btn-block btn-primary" role="button">Home</button>
+                            </div>
                         </div>
                     </form>        
                 </div>
