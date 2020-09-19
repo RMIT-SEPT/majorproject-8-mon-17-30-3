@@ -1,5 +1,6 @@
 package rmit.com.sept.sept.controller;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import rmit.com.sept.sept.Booking;
 import rmit.com.sept.sept.Company;
+<<<<<<< Updated upstream
+=======
+import rmit.com.sept.sept.CustomLoginSuccessHandler;
+import rmit.com.sept.sept.Role;
+>>>>>>> Stashed changes
 import rmit.com.sept.sept.User;
 import rmit.com.sept.sept.Worker;
 import rmit.com.sept.sept.service.BookingService;
@@ -18,22 +24,56 @@ import rmit.com.sept.sept.service.UserService;
 import rmit.com.sept.sept.service.WorkerService;
 
 import javax.validation.Valid;
+
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+<<<<<<< Updated upstream
 @Controller
+=======
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson; 
+import com.google.gson.GsonBuilder; 
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+>>>>>>> Stashed changes
 public class AuthenticationController {
 
 	@Autowired
 	UserService userService;
 	
+<<<<<<< Updated upstream
 	@Autowired
 	BookingService bookingService;
+=======
+
+	// @Autowired
+    // JdbcTemplate template;
+    
+    // @Autowired
+    private final UserRepository userRepository;
+
+    private final RoleRepository roleRepository;
+
+    private final BCryptPasswordEncoder encoder;
+
+    private final UserService userService;
+
+    private final CustomLoginSuccessHandler custom;
+	// UserRepository userRepository;
+	
+	// @Autowired
+	// BookingService bookingService;
+>>>>>>> Stashed changes
 	
 	@Autowired
 	WorkerService workerService;
 	
+<<<<<<< Updated upstream
 	public int userId;
 	
 	
@@ -44,6 +84,26 @@ public class AuthenticationController {
 		modelAndView.setViewName("login"); // resources/template/login.htm
 		return modelAndView;
 	}
+=======
+    // public int userId;
+    
+    AuthenticationController(UserRepository userRepository,RoleRepository roleRepository,BCryptPasswordEncoder encoder,UserService userService,CustomLoginSuccessHandler custom) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.encoder = encoder;
+        this.userService = userService;
+        this.custom = custom;
+    }
+	
+	
+
+// 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+// 	public ModelAndView login() {
+// 		ModelAndView modelAndView = new ModelAndView();
+// 		modelAndView.setViewName("login"); // resources/template/login.htm
+// 		return modelAndView;
+// 	}
+>>>>>>> Stashed changes
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register() {
@@ -102,12 +162,37 @@ public class AuthenticationController {
 	}
 
 	
+<<<<<<< Updated upstream
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView adminHome() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin"); // resources/template/admin.html
 		return modelAndView;
 	}
+=======
+	// @RequestMapping(value = "/admin", method = RequestMethod.GET)
+	// public ModelAndView adminHome() {
+	// 	ModelAndView modelAndView = new ModelAndView();
+	// 	modelAndView.setViewName("admin"); // resources/template/admin.html
+	// 	return modelAndView;
+    // }
+	
+//     @RequestMapping(value = "/loginUser", method = RequestMethod.GET)
+    @PostMapping("/loginUser")
+	public String login(@RequestBody User newUser) {
+    	System.out.println(newUser.getEmail());
+        int id = userService.findIdLogin(newUser.getEmail());
+        String userType = userService.findUserType(id);
+        System.out.println(userType);
+    	System.out.println("here");
+   
+    	String jsonString = "{\"email\":\""+newUser.getEmail()+"\", \"userType\":\""+userType+"\"}"; 
+        
+
+        return jsonString;
+    
+    }
+>>>>>>> Stashed changes
 
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public ModelAndView registerUser(@Valid User user,BindingResult bindingResult, ModelMap modelMap) {

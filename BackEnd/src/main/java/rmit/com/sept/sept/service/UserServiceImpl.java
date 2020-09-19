@@ -89,14 +89,71 @@ public class UserServiceImpl implements UserService {
         };
 
         return template.query(sql, rm);
-	}
+    }
+    @Override
+    public int findIdLogin(String email){
+
+        int intId = 0;
+		try {
+			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+	        Connection conn = DriverManager.getConnection(url,"root","Susstain098."); 
+	        Statement st = conn.createStatement(); 
+	        ResultSet rs;
+	        
+            rs = st.executeQuery("SELECT user_id FROM user WHERE user.email ='"+email+"'");
+            while ( rs.next() ) {
+                String id = rs.getString("user_id");
+                intId=Integer.parseInt(id);  
+                System.out.println(intId);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+		
+		return intId;
+      
+    }
+
+    @Override
+    public String findUserType(int id){
+
+        String userType = "";
+		try {
+			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+	        Connection conn = DriverManager.getConnection(url,"root","Susstain098."); 
+	        Statement st = conn.createStatement(); 
+	        ResultSet rs;
+	        
+            rs = st.executeQuery("SELECT auth_role_id FROM auth_user_role WHERE auth_user_role.auth_user_id ='"+id+"'");
+            while ( rs.next() ) {
+                String type = rs.getString("auth_role_id");
+                int userId =Integer.parseInt(type);  
+                if(userId == 1 ){
+                    userType = "ADMIN_USER";
+                }
+                if(userId == 2 ){
+                    userType = "SITE_USER";
+                }
+                System.out.println(userType);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+		
+		return userType;
+      
+    }
 
 	@Override
 	public int findByUsername(String username) {
 		int intId = 0;
 		try {
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root","ronaldo7!!"); 
+	        Connection conn = DriverManager.getConnection(url,"root","Susstain098."); 
 	        Statement st = conn.createStatement(); 
 	        ResultSet rs;
 	        

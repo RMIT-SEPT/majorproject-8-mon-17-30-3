@@ -35,7 +35,6 @@ public class Company {
 		this.company_id = company_id;
 		this.company_name = company_name;
 		this.service_name = service_name;
-		
 	}
 	
 	public Company() {

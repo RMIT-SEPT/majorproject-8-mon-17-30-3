@@ -30,7 +30,7 @@ public class WorkerServiceImpl implements WorkerService {
         List<Company> listCategory = new ArrayList<>();
         String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
         String user = "root";
-        String password = "KG@7291979369";
+        String password = "Susstain098.";
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT company_name FROM company";
             Statement statement = connection.createStatement();

@@ -75,6 +75,8 @@ public class User {
 	
 	@Column(name = "number")
 	public String number;
+	
+	public String userType;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
@@ -84,7 +86,18 @@ public class User {
 		this.name = firstname;
 		this.lastName = lastname;
 		this.email = email;
-	}
+    }
+    
+    public User(String email) {
+		this.email = email;
+    }
+    
+    public User(String email, String userType ) {
+    	this.email = email;
+    	this.userType = userType;
+    }
+    
+    
 	
 	public User() {
 		
@@ -175,6 +188,11 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+	 public String toString() { 
+		
+	      return "User [ name: "+email+", password: "+ password + " , :user_type :admin]"; 
+	 }  
 	
 
 }
