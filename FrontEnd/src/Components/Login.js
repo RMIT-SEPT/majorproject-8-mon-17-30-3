@@ -29,6 +29,36 @@ class Login extends Component {
         })
     }
 
+<<<<<<< Updated upstream
+=======
+    handleSubmit = e => {
+        e.preventDefault();
+        let information
+        const customer = {
+            email: this.state.email,
+            password: this.state.password,
+           
+        };
+        axios.post('http://localhost:8080/loginUser',customer)
+        .then(res=>{
+            console.log('Response from main API: ',res)
+            console.log('Home Data: ',res.data.userType)
+            information=res.data;
+             this.state.userType=information.userType;
+            if(information.userType == 'ADMIN_USER'){
+                this.props.history.push({
+                    pathname: '/AdminHome',
+                });
+            }
+            else if(information.userType == 'SITE_USER'){
+                this.props.history.push({
+                    pathname: '/CustomerHome',
+                });
+            }
+            else{
+                
+            }
+>>>>>>> Stashed changes
 
     handleSubmit = (event) => {
         alert(`${this.state.firstName} ${this.state.lastName}  Login Successfully !`)

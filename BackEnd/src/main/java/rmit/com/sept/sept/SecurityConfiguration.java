@@ -47,7 +47,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").permitAll()
 				.antMatchers("/register").permitAll()
+<<<<<<< Updated upstream
 				.antMatchers("/registerWorker").permitAll()
+=======
+                .antMatchers("/registerWorker").permitAll()
+                .antMatchers("/createUser").permitAll()
+                .antMatchers("/createBooking").permitAll()
+                .antMatchers("/loginUser").permitAll()
+>>>>>>> Stashed changes
 				.antMatchers(HttpMethod.GET,"/bookings").permitAll()
 				.antMatchers(HttpMethod.DELETE,"/booking/**").permitAll()
 				.antMatchers("/home/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
