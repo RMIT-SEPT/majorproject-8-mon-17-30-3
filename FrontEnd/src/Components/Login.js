@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './styles.css'
+import './CSS/global.css'
 import loginImg from './Images/avatar.png'
 
 class Login extends Component {
@@ -45,18 +45,31 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="loginbox">
+            <div className="registerBox col-md-5 align-items-center">
+             <div className="container-fluid">
                 <img src={loginImg} class="avatar"></img>
                     <form onSubmit={this.handleSubmit}>
-                        <h1>AGME Login</h1>
-                            <p>Username </p> <input type="text" value={this.state.username} onChange={this.userNamehandler} placeholder="Username" required /><br />
-                            <p>Password</p> <input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" required /><br />
-                        <br/><input type="submit" value="Sign in" /><br/>
-                            <a href="/Register">Create Account</a><br/><br/>
-                            <a href="/Home"> Home</a>
-                    </form>        
-            </div>
+                        <h1>Login</h1>
+                            <p>Username</p> 
+                                <input type="text" 
+                                value={this.state.username} 
+                                onChange={this.userNamehandler} 
+                                placeholder="Username" required/>
 
+                            <p>Password</p> 
+                                <input type="password" 
+                                value={this.state.password} 
+                                onChange={this.passwordhandler} 
+                                placeholder="Password" required/>
+                                
+                        <input className="btn-success" type="submit" value="Sign in" />
+                        <div class="btn-toolbar col-lg-12">
+                            <button href="Register" class="btn btn-success mx-auto" role="button">Register</button>
+                            <button href="Home" class="btn btn-success mx-auto" role="button">Home</button>
+                        </div>
+                    </form>        
+                </div>
+            </div>
         )
     }
 }

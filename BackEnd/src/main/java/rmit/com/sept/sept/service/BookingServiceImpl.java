@@ -1,17 +1,16 @@
 package rmit.com.sept.sept.service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-
 import rmit.com.sept.sept.Booking;
 import rmit.com.sept.sept.Company;
 import rmit.com.sept.sept.repository.BookingRepository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -76,6 +75,20 @@ public class BookingServiceImpl implements BookingService {
 //		int i=Integer.parseInt(iaa);  
 		List<Booking> b = getAllBookings();
 		b.removeIf(t -> t.getBookingId() == (id));
+	}
+
+	@Override
+	public boolean isBookingPresent(int id) {
+		// TODO Auto-generated method stub
+		if(bookingRepository.existsById(id)){
+			return true;
+		}		//return false;
+		return false;
+	}
+
+	@Override
+	public BookingRepository getBookingRepository() {
+		return this.bookingRepository;
 	}
 
 }

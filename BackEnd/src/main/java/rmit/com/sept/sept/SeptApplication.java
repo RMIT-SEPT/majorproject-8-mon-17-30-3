@@ -1,16 +1,14 @@
 package rmit.com.sept.sept;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 @EnableAutoConfiguration
 @SpringBootApplication
 public class SeptApplication {
@@ -21,7 +19,7 @@ public class SeptApplication {
 //		System.out.print(encodedPassword);
 		try { 
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root","ronaldo7!!"); 
+	        Connection conn = DriverManager.getConnection(url,"root","password1");
 	        Statement st = conn.createStatement(); 
 	        st.executeUpdate("INSERT IGNORE INTO user(user_id,email,lastname,firstname, password, status)VALUES(6,'admin2@admin2.com','admin2','admin2','"+ encodedPassword +"','VERIFIED')");
 	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(1,'ADMIN_USER','ADMIN_USER')");

@@ -1,9 +1,9 @@
 package rmit.com.sept.sept.service;
 
-import java.util.List;
-
-import rmit.com.sept.sept.Company;
 import rmit.com.sept.sept.User;
+import rmit.com.sept.sept.repository.UserRepository;
+
+import java.util.List;
 
 public interface UserService {
 	
@@ -11,8 +11,10 @@ public interface UserService {
 	
 	public List<User> getUserDetails(int id);
 	
-	public boolean isUserPresent(User user);
-	
+	public boolean isUserPresent(int id);
+
+	public UserRepository getUserRepository();
+
 	public int findByUsername(String username);
 
 }

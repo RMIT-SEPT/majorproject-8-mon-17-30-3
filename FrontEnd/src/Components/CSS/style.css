@@ -51,6 +51,23 @@ thead {
     overflow: hidden !important;
   }
 
+  .accountBox {
+    margin: auto;
+  }
+
+  .form-text {
+    font-family: "Arial";
+    font-weight: bold;
+    color: white;
+  }
+
+  .form-title {
+    font-family: "Arial";
+    font-weight: bold;
+    color: white;
+    font-size: 40px;
+  }
+
   .loginbox p{
     margin: 0;
     padding: 0;

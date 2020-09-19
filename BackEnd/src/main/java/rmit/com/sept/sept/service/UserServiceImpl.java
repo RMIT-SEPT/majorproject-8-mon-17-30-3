@@ -1,27 +1,22 @@
 package rmit.com.sept.sept.service;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import rmit.com.sept.sept.Company;
 import rmit.com.sept.sept.Role;
 import rmit.com.sept.sept.User;
-//import rmit.com.sept.sept.repository.CompanyRepository;
 import rmit.com.sept.sept.repository.RoleRepository;
 import rmit.com.sept.sept.repository.UserRepository;
+
+import java.sql.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+//import rmit.com.sept.sept.repository.CompanyRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -60,8 +55,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isUserPresent(User user) {
+	public boolean isUserPresent(int id) {
 		// TODO Auto-generated method stub
+		if(userRepository.existsById(id)){
+			return true;
+		}		//return false;
 		return false;
 	}
 
@@ -124,7 +122,13 @@ public class UserServiceImpl implements UserService {
 //		
 //	}
 
+	public UserRepository getUserRepository(){
+		return this.userRepository;
+
+	}
 
 
-	
+
+
+
 }

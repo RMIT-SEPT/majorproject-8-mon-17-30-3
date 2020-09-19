@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './CSS/homeStyle.css'
+import './CSS/homeglobal.css'
 import logo from './CSS/logo.png'
 
 class AdminHome extends Component {
