@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import loginImg from '../Components/avatar.png'
 import './CSS/global.css'
 import axios from "axios";
+import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
 
 class Register extends Component {
@@ -160,10 +161,10 @@ class Register extends Component {
                     <br />    
                     <div className="row">
                             <div className="col">
-                                <button href="Register" class="btn btn-block btn-danger" role="button">Login</button>
+                                <Link to="/Register" class="btn btn-block btn-danger" role="button">Login</Link>
                             </div>
                             <div className="col">
-                                <button href="Home" class="btn btn-block btn-primary" role="button">Home</button>
+                                <Link to="/Home" class="btn btn-block btn-primary" role="button">Home</Link>
                             </div>
                         </div>
                 </form>

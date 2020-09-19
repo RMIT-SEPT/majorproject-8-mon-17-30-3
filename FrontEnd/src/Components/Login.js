@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './CSS/global.css'
 import loginImg from './Images/avatar.png'
+import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
 class Login extends Component {
     constructor(props) {
@@ -65,10 +66,10 @@ class Login extends Component {
                         <input className="btn btn-success btn-block mt-4" type="submit" value="Sign in" />
                         <div className="row">
                             <div className="col">
-                                <button href="Register" class="btn btn-block btn-danger" role="button">Register</button>
+                                <Link to="Register" class="btn btn-block btn-danger" role="button">Register</Link>
                             </div>
                             <div className="col">
-                                <button href="Home" class="btn btn-block btn-primary" role="button">Home</button>
+                                <Link to="Home" class="btn btn-block btn-primary">Home</Link>
                             </div>
                         </div>
                     </form>        
