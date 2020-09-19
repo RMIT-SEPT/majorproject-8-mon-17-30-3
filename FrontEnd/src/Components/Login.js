@@ -1,23 +1,15 @@
-//import React, { Component } from 'react'
 import React,{Component,useEffect,useState} from 'react';
 import './CSS/style.css'
-import { Route , withRouter} from 'react-router-dom';
 import loginImg from '../Components/avatar.png'
 import axios from 'axios';
-import {createBrowserHistory} from 'history';
-import  { Redirect } from 'react-router-dom';
-
 
 class Login extends Component {
     
-
-
-        state = {
+    state = {
             email: "",
             password: "",
             userType:''
         }
-        // this.handleSubmit=this.handleSubmit.bind(this)
 
     emailhandler = (event) => {
         this.setState({
@@ -49,42 +41,20 @@ class Login extends Component {
                     pathname: '/AdminHome',
                 });
             }
-            // else if(information.userType == "SITE_USER"){
-            //     this.props.history.push({
-            //         pathname: '/CustomerHome',
-            //     });
-            // }
             else{
                 this.props.history.push({
                     pathname: '/CustomerHome',
                 });
             }
-            // setData({userType:information.userType})
+
             console.log('Colors Data: ',res.data.data)
-            // setColorsData(res.data.data)
+
         })
         .catch(err=>{
             console.log(err);
         })
-        // if(this.state.userType == 'ADMIN_USER'){
-        //     // return <Redirect to='/Register'  />
-        //      this.props.history.push("/AdminHome")
-        // }
-        // // else if(information.userType == "SITE_USER"){
-        // //     this.props.history.push({
-        // //         pathname: '/CustomerHome',
-        // //     });
-        // // }
-        // else{
-        //     // this.props.history.push({
-        //     //     pathname: '/Register',
-        //     // });
-        //      this.props.history.push("/CustomerHome");
-        //     // return <Redirect to='/Register'  />
-        // }
-    }
 
-    
+    }
 
     render() {
         return (

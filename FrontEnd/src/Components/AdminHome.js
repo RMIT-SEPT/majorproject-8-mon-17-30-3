@@ -23,7 +23,7 @@ class AdminHome extends Component {
                           </div>
                           <ul className="nav-area">
                               <li><a href="Home">AGME</a></li>
-                              <li><a href="#">Logout</a></li>
+                              <li><a href="/Login">Logout</a></li>
                               </ul>
                               <div className="welcome-text">
                                   <h1> 

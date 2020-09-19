@@ -22,8 +22,8 @@ class CustomerHome extends Component {
                              
                           </div>
                           <ul className="nav-area">
-                              <li><a href="Home">AGME</a></li>
-                              <li><a href="Login">LOGOUT</a></li>
+                              <li><a href="/Home">AGME</a></li>
+                              <li><a href="/Login">LOGOUT</a></li>
                               </ul>
                               <div className="welcome-text">
                                   <h1> 
