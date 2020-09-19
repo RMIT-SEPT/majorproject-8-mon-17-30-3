@@ -55,7 +55,7 @@ class CreateBooking extends Component {
 
     render() {
         return (
-            <div className="loginbox">
+            <div className="bookingbox">
                 <img src={loginImg} class="avatar"></img>
                 <form onSubmit={this.handleSubmit}>
                <h1>AGME Booking</h1>

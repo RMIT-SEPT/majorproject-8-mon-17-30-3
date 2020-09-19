@@ -22,14 +22,13 @@ class CustomerHome extends Component {
                              
                           </div>
                           <ul className="nav-area">
-                              <li><a href="/Home">AGME</a></li>
                               <li><a href="/Login">LOGOUT</a></li>
                               </ul>
                               <div className="welcome-text">
                                   <h1> 
                                   <a href="#">View Past Bookings</a><br></br>
                                   <a href="CreateBooking">Create a Booking</a><br></br>
-                                  <a href="#">View Details</a><br></br>
+                                  <a href="Profile">View Details</a><br></br>
                                       </h1>
                                   </div>
                       </header>
