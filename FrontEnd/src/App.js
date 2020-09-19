@@ -5,12 +5,9 @@ import Register from './Components/Register'
 import Login from './Components/Login';
 import Home from './Components/Home'
 import AdminHome from './Components/AdminHome'
-import BookingComp from './Components/BookingComponent'
-import BookingComponent from './Components/BookingComponent';
-import BookingComponent2 from './Components/BookingComponentTrial'
-//import Login from './Components/Login'
 import CustomerHome from './Components/CustomerHome' 
 import CreateBooking from './Components/CreateBooking'
+import Profile from './Components/Profile'
 function App() {
   
   return (
@@ -28,6 +25,7 @@ function App() {
              <Route path="/AdminHome" component={AdminHome}></Route>
              <Route path="/CustomerHome" component={CustomerHome}></Route>
              <Route path="/CreateBooking" component={CreateBooking}></Route>
+             <Route path="/Profile" component={Profile}></Route>
          </Switch>
       </BrowserRouter> 
      {/* <BookingComponent2/>  */}

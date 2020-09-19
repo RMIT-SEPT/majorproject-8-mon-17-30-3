@@ -47,7 +47,7 @@ class Login extends Component {
                 });
             }
             else{
-                
+                alert(`INVALID CREDENTIALS`)
             }
 
             console.log('Colors Data: ',res.data.data)

@@ -12,6 +12,7 @@ import rmit.com.sept.sept.repository.RoleRepository;
 import rmit.com.sept.sept.repository.UserRepository;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +33,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
     JdbcTemplate template;
+	 
+	List<User> userList = new ArrayList<User>();
 	
 	private int sessionUserID;
 	
@@ -81,15 +84,98 @@ public class UserServiceImpl implements UserService {
                 User user = new User(resultSet.getString("firstname"),
                         resultSet.getString("lastname"),
                         resultSet.getString("email"));
+                user.setName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
                 System.out.println(user.getName());
                 System.out.println(user.getLastName());
-               
+               userList.add(user);
                 return user;
             }
         };
 
         return template.query(sql, rm);
-	}
+    }
+	
+//	@Override
+//	public void getDetailsForProfile(int id) {
+//	
+//		String sql = "select firstname,lastname,email from user where user.user_id = '" + id + "'";
+//        RowMapper<User> rm = new RowMapper<User>() {
+//            @Override
+//            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+//                User user = new User(resultSet.getString("firstname"),
+//                        resultSet.getString("lastname"),
+//                        resultSet.getString("email"));
+//                user.setName(resultSet.getString("firstName"));
+//                user.setLastName(resultSet.getString("lastName"));
+//                user.setEmail(resultSet.getString("email"));
+//                System.out.println(user.getName());
+//                System.out.println(user.getLastName());
+//               
+//                return user;
+//            }
+//        };
+//
+////        return template.query(sql, rm);
+//    }
+    @Override
+    public int findIdLogin(String email){
+
+        int intId = 0;
+		try {
+			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+	        Connection conn = DriverManager.getConnection(url,"root","Susstain098."); 
+	        Statement st = conn.createStatement(); 
+	        ResultSet rs;
+	        
+            rs = st.executeQuery("SELECT user_id FROM user WHERE user.email ='"+email+"'");
+            while ( rs.next() ) {
+                String id = rs.getString("user_id");
+                intId=Integer.parseInt(id);  
+                System.out.println(intId);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+		
+		return intId;
+      
+    }
+
+    @Override
+    public String findUserType(int id){
+
+        String userType = "";
+		try {
+			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+	        Connection conn = DriverManager.getConnection(url,"root","Susstain098."); 
+	        Statement st = conn.createStatement(); 
+	        ResultSet rs;
+	        
+            rs = st.executeQuery("SELECT auth_role_id FROM auth_user_role WHERE auth_user_role.auth_user_id ='"+id+"'");
+            while ( rs.next() ) {
+                String type = rs.getString("auth_role_id");
+                int userId =Integer.parseInt(type);  
+                if(userId == 1 ){
+                    userType = "ADMIN_USER";
+                }
+                if(userId == 2 ){
+                    userType = "SITE_USER";
+                }
+                System.out.println(userType);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+		
+		return userType;
+      
+    }
 
 	@Override
 	public int findByUsername(String username) {
@@ -126,6 +212,12 @@ public class UserServiceImpl implements UserService {
 		return this.userRepository;
 
 	}
+
+	@Override
+	public List<User> getList() {
+		return userList;
+	}
+
 
 
 

@@ -22,9 +22,6 @@ class Home extends Component {
                              
                           </div>
                           <ul className="nav-area">
-                              
-                              <li><a href="Home">AGME</a></li>
-                              <li><a href="AdminHome">ABOUT US</a></li>
                               <li><a href="/Login">LOGIN</a></li>
                               <li><a href="/Register">REGISTER</a></li>
                               </ul>
