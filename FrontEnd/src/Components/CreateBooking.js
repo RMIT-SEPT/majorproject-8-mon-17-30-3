@@ -1,7 +1,7 @@
 import React,{Component,useEffect,useState} from 'react';
-import './CSS/booking.css'
-import loginImg from '../Components/avatar.png'
+import './CSS/global.css'
 import axios from 'axios';
+import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
 class CreateBooking extends Component {
     
@@ -55,19 +55,55 @@ class CreateBooking extends Component {
 
     render() {
         return (
-            <div className="bookingbox">
-                <img src={loginImg} class="avatar"></img>
-                <form onSubmit={this.handleSubmit}>
-               <h1>AGME Booking</h1>
-                    <p>Service Name </p> <input type="text" value={this.state.serviceName} onChange={this.servicehandler} placeholder="serviceName" required /><br />
-                    <p>Worker Name</p> <input type="text" value={this.state.workerName} onChange={this.workerhandler} placeholder="workerName" required /><br />
-                    <p>Date</p> <input type="text" value={this.state.date} onChange={this.datehandler} placeholder="date" required /><br />
-                    <p>Time</p> <input type="text" value={this.state.time} onChange={this.timehandler} placeholder="time" required /><br />
-                    <br/><input type="submit" value="Create Booking" /> 
-                    <a href="/CustomerHome"> Back to DashBoard</a>
-            </form>        
-            </div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="content-box col-md-8 m-auto">
+                        <h5 className="pageTitle display-4 text-center">Make a New Booking</h5>
+                        <hr />
 
+                <form className="booking-form" onSubmit={this.handleSubmit}>
+                  
+                <h6>Service</h6> 
+                    <div className="form-group">
+                        <input type="text" className="form-control form-control-lg "
+                        value={this.state.serviceName} 
+                        onChange={this.servicehandler} 
+                        placeholder="Service" 
+                        required />
+                    </div>
+
+                    <h6>Worker</h6> 
+                    <div className="form-group">
+                        <input type="text"  className="form-control form-control-lg "
+                        value={this.state.workerName} 
+                        onChange={this.workerhandler} 
+                        placeholder="Worker" 
+                        required />
+                    </div>
+
+                    <h6>Date</h6>
+                    <div className="form-group">
+                        <input type="date"  className="form-control form-control-lg "
+                        value={this.state.date} 
+                        onChange={this.datehandler} 
+                        placeholder="Date" 
+                        required />
+                    </div>
+
+                    <h6>Time</h6>
+                    <div className="form-group"> 
+                        <input type="time"  className="form-control form-control-lg "
+                        value={this.state.time} 
+                        onChange={this.timehandler} 
+                        placeholder="Time" 
+                        required />
+                    </div>
+                    <input className="btn btn-success btn-block mt-4" type="submit" value="Create Booking" /> 
+                    <Link to="/Dashboard" className="btn btn-danger btn-block mt-4">Cancel</Link>
+                    </form>        
+                </div>
+            </div>
+        </div>
         )
     }
 }

@@ -19,15 +19,18 @@ const Profile=()=>{
             })
     },[])
     return(
-        <>
-        <div className="Profilebox">
-           <p>Email: {Data.email}</p><br/>
-           <p>Firt Name: {Data.firstName}</p><br/>
-           <p>Last Name:  {Data.lastName}</p><br/>
-           <a href="/CustomerHome"> Back to DashBoard</a>
-
+        <div className="container-fluid">
+                <div className="row">
+                    <div className="content-box col-md-8 m-auto">
+                        <h5 className="pageTitle display-4 text-center">Your Profile</h5>
+                        <hr />
+                            <p>Email: {Data.email}</p><br/>
+                            <p>Firt Name: {Data.firstName}</p><br/>
+                            <p>Last Name:  {Data.lastName}</p><br/>
+                            <button href="/CustomerHome"> Back to DashBoard</button>
+                </div>
            </div>
-        </>
+        </div>
     )
 }
 
