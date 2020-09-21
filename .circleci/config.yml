@@ -10,11 +10,10 @@ jobs:
           DB_ROOT: root
           DB_URL: jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
           DB_DRIVER: com.mysql.jdbc.Driver
-          DB_PASS: ""
+          DB_PASS: "password1"
       - image: circleci/mysql:8.0.4
         enviroment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ROOT_PASSWORD: 'password1'
 
     steps:
 
@@ -44,6 +43,7 @@ jobs:
       
       - store_artifacts:
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+
   front: #job for front end
     working_directory: ~/majorproject-8-mon-17-30-3/FrontEnd
     docker:
