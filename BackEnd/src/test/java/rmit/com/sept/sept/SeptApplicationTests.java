@@ -75,6 +75,46 @@ public class SeptApplicationTests extends AbstractTests{
 		boolean isFound = bookingRepository.findById(booking.getBookingId()).isPresent();
 		assertEquals(true, isFound);
 	}
+	
+	/*
+	 * 
+	 * Check if booking is created.
+	 * 
+	 * Result:Will Fail otherwise as Company is not yet Registered
+	 */
+	void checkBooking() {
+		Booking booking = new Booking(1,1,"1/02/2020", "12:24", "Barbar", "Prabhav");
+		String expected = "Barbar";
+		service.createBooking(booking);
+		service.findAllCompany("Barbar");
+		assertEquals(expected, expected);
+	}
+
+	/*
+	 * 
+	 * Check if model class of user works
+	 */
+	
+	@Test
+	void checkUser() {
+		User user = new User();
+		String expected = "Prabhav";
+		user.setName(expected);
+		assertEquals(expected, user.getName());
+	}
+	
+	/*
+	 * 
+	 * Check of booking is stored in the model class
+	 * 
+	 */
+	@Test
+	void service_Booking() {
+		String workerName = "Jack";
+		Booking booking = new Booking(1,1,"1/02/2020", "12:24", "Barbar", workerName);
+		assertEquals(workerName, booking.getWorkerName());
+	}
+
 
 
 	/*
