@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
         int intId = 0;
 		try {
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root","Susstain098."); 
+	        Connection conn = DriverManager.getConnection(url,"root","password1");
 	        Statement st = conn.createStatement(); 
 	        ResultSet rs;
 	        
@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
 		int intId = 0;
 		try {
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root","Susstain098."); 
+	        Connection conn = DriverManager.getConnection(url,"root","password1");
 	        Statement st = conn.createStatement(); 
 	        ResultSet rs;
 	        

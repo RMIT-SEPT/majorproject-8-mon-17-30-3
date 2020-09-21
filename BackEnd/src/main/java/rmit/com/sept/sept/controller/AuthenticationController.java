@@ -1,47 +1,25 @@
 package rmit.com.sept.sept.controller;
 
-import org.apache.tomcat.util.json.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.servlet.ModelAndView;
 import rmit.com.sept.sept.Booking;
-import rmit.com.sept.sept.Company;
 import rmit.com.sept.sept.CustomLoginSuccessHandler;
 import rmit.com.sept.sept.Role;
 import rmit.com.sept.sept.User;
-import rmit.com.sept.sept.Worker;
 import rmit.com.sept.sept.repository.BookingRepository;
 import rmit.com.sept.sept.repository.RoleRepository;
 import rmit.com.sept.sept.repository.UserRepository;
 import rmit.com.sept.sept.service.BookingService;
 import rmit.com.sept.sept.service.UserService;
-import rmit.com.sept.sept.service.WorkerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson; 
-import com.google.gson.GsonBuilder; 
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -126,17 +104,15 @@ public class AuthenticationController {
         return jsonString;
     
     }
-    
-	@GetMapping("/profile")
-    public String profile(){
-		userService.getUserDetails(userID);
-		List<User> userList = userService.getList();
 
-		String jsonString = "{\"email\":\""+userList.get(0).getEmail()+"\","
-				+ " \"firstName\":\""+userList.get(0).getName()+ "\","
-					+ " \"lastName\":\""+userList.get(0).getLastName() +"\"}"; 
-        
-    	
+    @GetMapping("/profile")
+    public String profile(){
+        List<User> userList = userService.getUserDetails(userID);
+        String jsonString = "{\"email\":\""+userList.get(0).getEmail()+"\","
+                + " \"firstName\":\""+userList.get(0).getName()+ "\","
+                + " \"lastName\":\""+userList.get(0).getLastName() +"\"}";
+
+
         return jsonString;
     }
 
@@ -159,7 +135,7 @@ public class AuthenticationController {
      
 	}
 	
-	 @GetMapping("/logout")
+	 @GetMapping("/logoutUser")
      public String fetchSignoutSite(HttpServletRequest request, HttpServletResponse response) {        
          Authentication auth = SecurityContextHolder.getContext().getAuthentication();
          if (auth != null) {
