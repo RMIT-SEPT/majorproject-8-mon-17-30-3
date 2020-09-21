@@ -39,8 +39,8 @@ import axios from 'axios';
                         </ul>
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <a type="submit" className="nav-link">Logout</a>
-                            </li>   
+                                <a type="submit" className="nav-link logout-button" href="Login">Logout</a>
+                            </li> 
                         </ul>
                     </div>
                 </div>
