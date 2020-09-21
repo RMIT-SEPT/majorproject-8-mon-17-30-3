@@ -27,7 +27,7 @@ class AdminHome extends Component {
                               <div className="welcome-text">
                                   <h1> 
                                   <a href="#">Assign Tasks</a><br></br>
-                                  <a href="#">View Bookings</a><br></br>
+                                  <a href="/AllBookings">View Bookings</a><br></br>
                                   <a href="#">Calendar</a><br></br>
                                   <a href="/Profile">View Details</a><br></br>
                                       </h1>

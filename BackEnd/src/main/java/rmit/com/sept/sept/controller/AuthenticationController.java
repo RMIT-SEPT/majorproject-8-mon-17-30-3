@@ -3,8 +3,10 @@ package rmit.com.sept.sept.controller;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,6 +27,8 @@ import rmit.com.sept.sept.service.BookingService;
 import rmit.com.sept.sept.service.UserService;
 import rmit.com.sept.sept.service.WorkerService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import java.io.PrintStream;
@@ -61,6 +65,8 @@ public class AuthenticationController {
     private final BookingRepository bookingRepository;
     
     private int userID;
+    
+    private final BookingService bookingService;
 
     private final CustomLoginSuccessHandler custom;
 	// UserRepository userRepository;
@@ -73,13 +79,36 @@ public class AuthenticationController {
 	
     // public int userId;
     
-    AuthenticationController(UserRepository userRepository,RoleRepository roleRepository,BCryptPasswordEncoder encoder,UserService userService,CustomLoginSuccessHandler custom, BookingRepository bookingRepository) {
+    AuthenticationController(UserRepository userRepository,RoleRepository roleRepository,BCryptPasswordEncoder encoder,UserService userService,
+    		CustomLoginSuccessHandler custom, BookingRepository bookingRepository, BookingService bookingService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.userService = userService;
         this.custom = custom;
-        this.bookingRepository= bookingRepository;
+        this.bookingRepository = bookingRepository;
+        this.bookingService = bookingService;
+    }
+    
+    @GetMapping("/bookings")
+    public String booking(){
+    List<Booking> bookingList = bookingService.getAllBookings();
+    String jsonString = "{\"data\":[";
+    
+    for(int i = 0; i < bookingList.size(); i++) {
+		jsonString += "{\"bookingID\":\""+bookingList.get(i).getBookingId()  + 
+				"\",\"serviceName\":\""+bookingList.get(i).getServiceName() +
+				"\",\"workerName\":\""+bookingList.get(i).getWorkerName() +		
+				"\",\"date\":\""+bookingList.get(i).getDate() + 
+				"\",\"time\":\""+bookingList.get(i).getTime();		
+
+		if(i != bookingList.size()-1) { 
+    		jsonString += "\"},"; 
+    	}
+    }
+    	
+    jsonString += "\"}]}";
+        return jsonString;
     }
 	
     @PostMapping("/loginUser")
@@ -90,7 +119,7 @@ public class AuthenticationController {
         String userType = userService.findUserType(id);
         System.out.println(userType);
     	System.out.println("here");
-   
+    	
     	String jsonString = "{\"email\":\""+newUser.getEmail()+"\", \"userType\":\""+userType+"\"}"; 
         
     	
@@ -129,6 +158,19 @@ public class AuthenticationController {
         return userRepository.save(newUser);
      
 	}
+	
+	 @GetMapping("/logout")
+     public String fetchSignoutSite(HttpServletRequest request, HttpServletResponse response) {        
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+         if (auth != null) {
+             new SecurityContextLogoutHandler().logout(request, response, auth);
+         }
+         	System.out.println(userID);
+           userID = 0;
+           System.out.println(userID);
+         return "redirect:/login?logout";
+     }
+	
 	
 	@PostMapping("/createBooking")
 	public Booking createBooking(@RequestBody Booking newBooking) {

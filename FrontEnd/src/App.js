@@ -8,15 +8,13 @@ import AdminHome from './Components/AdminHome'
 import CustomerHome from './Components/CustomerHome' 
 import CreateBooking from './Components/CreateBooking'
 import Profile from './Components/Profile'
+import AllBookings from './Components/AllBookings'
+
 function App() {
   
   return (
 
     <div className="App">
-     {/* <AdminHome/> */}
-     {/* <Home/> */}
-      {/* <Login/> */}
-
       <BrowserRouter>
          <Switch>
              <Route path="/Home" component={Home}></Route>
@@ -26,11 +24,10 @@ function App() {
              <Route path="/CustomerHome" component={CustomerHome}></Route>
              <Route path="/CreateBooking" component={CreateBooking}></Route>
              <Route path="/Profile" component={Profile}></Route>
+             <Route path="/AllBookings" component={AllBookings}></Route>
          </Switch>
       </BrowserRouter> 
-     {/* <BookingComponent2/>  */}
-      
-    </div>
+      </div>
 
   
 );
