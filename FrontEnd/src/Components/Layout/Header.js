@@ -31,7 +31,7 @@ import axios from 'axios';
                                 <a className="nav-link" href="/CreateBooking">Book</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/ViewBooking">Bookings</a>
+                                <a className="nav-link" href="/Bookings">Bookings</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/Profile">Profile</a>

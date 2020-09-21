@@ -573,10 +573,7 @@ header {
 	padding: 30px
 }
 
-th,
-td {
-	padding: 15px
-}
+
 
 @media(max-width:600px) {
 	.wrapper {
@@ -610,6 +607,10 @@ td {
 	.welcome-text h1 {
 		font-size: 30px
 	}
+}
+
+td, th {
+	width: 170px;
 }
 
 body {
