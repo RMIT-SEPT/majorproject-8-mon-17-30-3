@@ -19,7 +19,7 @@ public class SeptApplication {
 //		System.out.print(encodedPassword);
 		try { 
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root","Susstain098.");
+	        Connection conn = DriverManager.getConnection(url,"root","password1.");
 	        Statement st = conn.createStatement(); 
 	        st.executeUpdate("INSERT IGNORE INTO user(user_id,email,lastname,firstname, password, status)VALUES(6,'admin2@admin2.com','admin2','admin2','"+ encodedPassword +"','VERIFIED')");
 	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(1,'ADMIN_USER','ADMIN_USER')");
