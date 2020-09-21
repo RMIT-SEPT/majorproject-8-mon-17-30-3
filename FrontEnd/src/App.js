@@ -8,8 +8,9 @@ import AdminHome from './Components/AdminHome'
 import CustomerHome from './Components/CustomerHome' 
 import CreateBooking from './Components/CreateBooking'
 import Profile from './Components/Profile'
+import BookingComponent from './Components/BookingComponent'
 import AllBookings from './Components/AllBookings'
-
+import Bookings from './Components/Bookings'
 function App() {
   
   return (
@@ -17,17 +18,19 @@ function App() {
     <div className="App">
       <BrowserRouter>
          <Switch>
-             <Route path="/Home" component={Home}></Route>
+            <Route path="/Home" component={Home}></Route>
              <Route path="/Login" component={Login}></Route>
              <Route path="/Register" component={Register}></Route>
              <Route path="/AdminHome" component={AdminHome}></Route>
              <Route path="/CustomerHome" component={CustomerHome}></Route>
              <Route path="/CreateBooking" component={CreateBooking}></Route>
              <Route path="/Profile" component={Profile}></Route>
-             <Route path="/AllBookings" component={AllBookings}></Route>
+             <Route path="/Bookings" component={Bookings}></Route>
          </Switch>
       </BrowserRouter> 
-      </div>
+
+      
+    </div>
 
   
 );

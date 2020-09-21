@@ -1,34 +1,45 @@
-import React,{useEffect,useState} from 'react';
+import React from 'react';
+import { Table } from 'reactstrap';
 
-import axios from 'axios';
-
-const AllBookings=()=>{
-    const [Data,setData]=useState({
-        id:'',
-        serviceName:'',
-        workerName:'',
-        date:'',
-        time:''
-    })
-    
-    useEffect(()=>{
-        axios.get('http://localhost:8080/bookings')
-            .then(res=>{
-                let information=res.data;
-                setData({id:information.bookingID,serviceName:information.serviceName,workerName:information.workerName,
-                date:information.date,time:information.time})
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-    },[])
+const AllBookings=({data})=>{
     return(
         <>
-           <p>id: {Data.id}</p>
-           <p>Service Name: {Data.serviceName}</p>
-           <p>Worker Name:  {Data.workerName}</p>
-           <p>Date :  {Data.date}</p>
-           <p>Time :  {Data.time}</p>
+        <Table>
+            <th>Booking ID</th>
+            <th>Service Name</th>
+            <th>Worker Name</th>
+            <th>Date </th>
+            <th>Time</th>
+            </Table>
+             <div> {
+            data && data.map((d)=>{
+               return(
+                    <div>
+                    
+                    <br></br><br></br>
+                    
+                    <Table>
+                      <thead>
+                        <tr>
+                          
+                        </tr>
+                      </thead>          
+                      <tbody>
+               <td>{d.bookingID}</td>
+               <td>{d.serviceName}</td>
+               <td>{d.workerName}</td>
+               <td>{d.date}</td>
+               <td>{d.time}</td>
+                </tbody>          
+                    </Table>  
+                  </div>
+                
+               )
+           })
+          } 
+        
+          <br/>
+        </div>
 
         </>
     )
