@@ -1,26 +1,15 @@
-//package rmit.com.sept.sept;
+package rmit.com.sept.sept;
+
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
 //
-//import static org.junit.Assert.assertEquals;
 //
-//import java.io.ByteArrayOutputStream;
-//import java.io.PrintStream;
-//import java.net.URI;
-//import java.net.URISyntaxException;
-//import java.util.List;
 //
-//import org.junit.Assert;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.client.RestTemplate;
-//import org.springframework.web.servlet.ModelAndView;
 //
-//import rmit.com.sept.sept.controller.AuthenticationController;
-//import rmit.com.sept.sept.service.BookingService;
 //
-//@SpringBootTest
-//class SeptApplicationTests {
+@SpringBootTest
+class SeptApplicationTests {
 //
 //	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 //	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -30,9 +19,9 @@
 //	@Autowired
 //	private BookingService service;
 //
-//	@Test
-//	void contextLoads() {
-//	}
+	@Test
+	void contextLoads() {
+	}
 //
 //
 //	@Test
@@ -78,4 +67,4 @@
 //		assertEquals(workerName, booking.getWorkerName());
 //	}
 //
-//}
+}
