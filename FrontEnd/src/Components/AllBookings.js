@@ -4,34 +4,28 @@ import { Table } from 'reactstrap';
 const AllBookings=({data})=>{
     return(
         <>
-        <Table>
-            <th>Booking ID</th>
-            <th>Service Name</th>
-            <th>Worker Name</th>
-            <th>Date </th>
-            <th>Time</th>
-            </Table>
+        <div className="container-fluid">
+        <div className="col-md-8 m-auto">
+        <table className="table">
+          <th>Booking ID</th>
+          <th>Service Name</th>
+          <th>Worker Name</th>
+          <th>Date </th>
+          <th>Time</th>
+            </table>
              <div> {
             data && data.map((d)=>{
                return(
                     <div>
-                    
-                    <br></br><br></br>
-                    
-                    <Table>
-                      <thead>
-                        <tr>
-                          
-                        </tr>
-                      </thead>          
+                    <table>         
                       <tbody>
-               <td>{d.bookingID}</td>
-               <td>{d.serviceName}</td>
-               <td>{d.workerName}</td>
-               <td>{d.date}</td>
-               <td>{d.time}</td>
-                </tbody>          
-                    </Table>  
+                        <td>{d.bookingID}</td>
+                        <td>{d.serviceName}</td>
+                        <td>{d.workerName}</td>
+                        <td>{d.date}</td>
+                        <td>{d.time}</td>
+                      </tbody>          
+                    </table>  
                   </div>
                 
                )
@@ -40,7 +34,8 @@ const AllBookings=({data})=>{
         
           <br/>
         </div>
-
+        </div>
+        </div>
         </>
     )
 }

@@ -126,6 +126,9 @@ class Register extends Component {
 
                     <h1 className="form-title">Create an account</h1>
 
+                    
+                    <button className="btn btn-primary btn-block mt-2" onClick={()=>this.operation()} >Register as a company</button><br />
+
                     <p className="form-text">First name</p>
                     <input type="text" value={this.state.name}
                         onChange={this.firsthandler}
@@ -176,14 +179,13 @@ class Register extends Component {
                     
                     <br />
                     <input className="btn btn-success btn-block mt-2" type="submit" value="Register Account" />
-                    <button className="btn btn-primary btn-block mt-2" onClick={()=>this.operation()} >Register as a company</button>
                     <br />    
                     <div className="row">
                             <div className="col">
-                                <Link to="/Register" class="btn btn-block btn-danger" role="button">Login</Link>
+                                <Link to="/Register" class="btn btn-block btn-info" role="button">Login</Link>
                             </div>
                             <div className="col">
-                                <Link to="/Home" class="btn btn-block btn-primary" role="button">Home</Link>
+                                <Link to="/Home" class="btn btn-block btn-info" role="button">Home</Link>
                             </div>
                         </div>
                 </form>

@@ -21,6 +21,10 @@ header {
 	position: relative
 }
 
+.logout-button {
+	background-color: red;
+}
+
 .nav-area {
 	float: right;
 	list-style: none;
