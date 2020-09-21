@@ -253,7 +253,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	background: url(956711.jpg);
+	background-image: radial-gradient(circle, #5585cd, #5977c5, #5f69bb, #665aaf, #6c4aa1);
 	background-size: cover;
 	background-position: bottom;
 	font-family: sans-serif

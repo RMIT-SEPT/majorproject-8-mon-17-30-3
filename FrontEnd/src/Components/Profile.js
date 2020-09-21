@@ -27,7 +27,7 @@ const Profile=()=>{
                             <p>Email: {Data.email}</p><br/>
                             <p>Firt Name: {Data.firstName}</p><br/>
                             <p>Last Name:  {Data.lastName}</p><br/>
-                            <button href="/CustomerHome"> Back to DashBoard</button>
+                            <button href="/"> Back to Dashboard</button>
                 </div>
            </div>
         </div>
