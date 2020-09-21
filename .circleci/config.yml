@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   back: # job for back end tests
-    working_directory: ~/majorproject-8-mon-17-30-3/BackEnd
+    working_directory: ~/Backend/src
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       
