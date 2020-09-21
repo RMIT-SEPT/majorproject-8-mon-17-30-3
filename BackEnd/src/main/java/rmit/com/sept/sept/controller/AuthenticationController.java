@@ -111,8 +111,6 @@ public class AuthenticationController {
         String jsonString = "{\"email\":\""+userList.get(0).getEmail()+"\","
                 + " \"firstName\":\""+userList.get(0).getName()+ "\","
                 + " \"lastName\":\""+userList.get(0).getLastName() +"\"}";
-
-
         return jsonString;
     }
 

@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
 import logo from '../Images/logo.png'
+import axios from 'axios';
 
  class Header extends Component {
+    handleSubmit = e => {
+        e.preventDefault();
+        axios
+        .get("http://localhost:8080/logoutUser")
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+        this.props.history.push({
+        pathname: '/Login',
+    });
+}
     render() {
         return (
         <div>
@@ -28,11 +39,8 @@ import logo from '../Images/logo.png'
                         </ul>
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                    <a className="nav-link" href="Login">Login</a>
-                            </li>
-                            <li className="nav-item">
-                                    <a className="nav-link " href="Register">Register</a>
-                            </li>    
+                                <a type="submit" className="nav-link">Logout</a>
+                            </li>   
                         </ul>
                     </div>
                 </div>
