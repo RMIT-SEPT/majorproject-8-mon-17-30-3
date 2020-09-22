@@ -6,11 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/* Company Class:	
- * 			This class is used to create a company table in MYSQL
- */
+
 @Entity
 @Table(name = "company")
 public class Company {

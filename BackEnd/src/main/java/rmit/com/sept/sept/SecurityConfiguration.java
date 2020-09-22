@@ -2,7 +2,6 @@ package rmit.com.sept.sept;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -33,9 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
-	
-	@Value("${spring.datasource.password}")
-	private String testPassword;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,11 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
 				.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
 	}
-	
-	/*
-	 * (non-Javadoc) APIS
-	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
-	 */
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -60,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/createUser").permitAll()
                 .antMatchers("/createBooking").permitAll()
                 .antMatchers("/loginUser").permitAll()
-                .antMatchers("/logoutUser").permitAll()
+				.antMatchers("/logoutUser").permitAll()
                 .antMatchers("/profile").permitAll()                
 				.antMatchers(HttpMethod.GET,"/bookings").permitAll()
 				.antMatchers(HttpMethod.DELETE,"/booking/**").permitAll()
@@ -85,11 +77,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.exceptionHandling()				
 				.accessDeniedPage("/access-denied");
 		  		
-	}
-	
-	@Bean
-	public String getPassword() {
-		return testPassword;
 	}
 
 	@Override

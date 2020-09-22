@@ -18,14 +18,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+//import rmit.com.sept.sept.repository.CompanyRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
-	SeptApplication app = new SeptApplication();
-	
+
 	@Autowired
 	BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	public SeptApplication main;
 	
 	@Autowired
 	RoleRepository roleRepository;
@@ -40,7 +42,6 @@ public class UserServiceImpl implements UserService {
 	
 	private int sessionUserID;
 	
-	// stores the user in the database
 	@Override
 	public void saveUser(User user) {
 
@@ -60,7 +61,6 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	// yet to be implemented
 	@Override
 	public boolean isUserPresent(int id) {
 		// TODO Auto-generated method stub
@@ -70,17 +70,14 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
-	// returns session ID
 	public int getSessionUserID() {
 		return sessionUserID;
 	}
 
-	// sets session ID
 	public void setSessionUserID(int sessionUserID) {
 		this.sessionUserID = sessionUserID;
 	}
 	
-	// returns a list containing user details (First Name, Last Name and email)
 	@Override
 	public List<User> getUserDetails(int id) {
 	
@@ -104,14 +101,14 @@ public class UserServiceImpl implements UserService {
         return template.query(sql, rm);
     }
 	
-	// finds the email of the user and returns an int
+
     @Override
     public int findIdLogin(String email){
-
+    
         int intId = 0;
 		try {
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root",	SeptApplication.sqlPassword); 
+	        Connection conn = DriverManager.getConnection(url,"root",main.getPassword());
 	        Statement st = conn.createStatement(); 
 	        ResultSet rs;
 	        
@@ -131,14 +128,13 @@ public class UserServiceImpl implements UserService {
       
     }
 
-    // returns a string of the type of user
     @Override
     public String findUserType(int id){
 
         String userType = "";
 		try {
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root",SeptApplication.sqlPassword); 
+	        Connection conn = DriverManager.getConnection(url,"root",main.getPassword());
 	        Statement st = conn.createStatement(); 
 	        ResultSet rs;
 	        
@@ -164,13 +160,12 @@ public class UserServiceImpl implements UserService {
       
     }
 
-    // finds the user by their username
 	@Override
 	public int findByUsername(String username) {
 		int intId = 0;
 		try {
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
-	        Connection conn = DriverManager.getConnection(url,"root",SeptApplication.sqlPassword); 
+	        Connection conn = DriverManager.getConnection(url,"root",main.getPassword());
 	        Statement st = conn.createStatement(); 
 	        ResultSet rs;
 	        
@@ -190,13 +185,13 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	// returns user repository
+
+
 	public UserRepository getUserRepository(){
 		return this.userRepository;
 
 	}
 
-	// returns the global list of user
 	@Override
 	public List<User> getList() {
 		return userList;

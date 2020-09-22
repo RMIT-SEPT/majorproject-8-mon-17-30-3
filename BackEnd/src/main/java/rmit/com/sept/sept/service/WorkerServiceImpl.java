@@ -18,21 +18,22 @@ public class WorkerServiceImpl implements WorkerService {
 	@Autowired
 	WorkerRepository workerRepository;
 	
+	@Autowired
+	public SeptApplication main;
 	
-	// saves the worker in the database
 	@Override
 	public void saveWorker(Worker worker) {
 		workerRepository.save(worker);
 		
 	}
 	
-	// returns list of all companies
 	@Override
 	public List<Company> list() throws SQLException {
         List<Company> listCategory = new ArrayList<>();
         String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
         String user = "root";
-        try (Connection connection = DriverManager.getConnection(url, user, SeptApplication.sqlPassword)) {
+        String password = main.getPassword();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT company_name FROM company";
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);

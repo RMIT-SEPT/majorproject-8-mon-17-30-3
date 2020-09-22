@@ -25,8 +25,7 @@ import java.util.List;
 @RestController
 public class AuthenticationController {
 
-	@Value("${spring.datasource.password}")
-	public String password;
+	
 	
 	private final UserRepository userRepository;
 
@@ -92,7 +91,7 @@ public class AuthenticationController {
 	// returns the the type of user logging in for authentication
 	@PostMapping("/loginUser")
 	public String login(@RequestBody User newUser) {
-		System.out.println(password);
+	
 		int id = userService.findIdLogin(newUser.getEmail());
 		userID = id;
 		String userType = userService.findUserType(id);
@@ -139,8 +138,6 @@ public class AuthenticationController {
 		return bookingRepository.save(newBooking);
 	}
 	
-	public String getPassword() {
-		return password;
-	}
+
 
 }

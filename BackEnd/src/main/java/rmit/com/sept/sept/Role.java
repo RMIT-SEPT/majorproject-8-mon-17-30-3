@@ -7,9 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/* Role Class:	
- * 			This class is used to create a role table in MYSQL
- */
 @Entity
 @Table(name = "role")
 public class Role {
