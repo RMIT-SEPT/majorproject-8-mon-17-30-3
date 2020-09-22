@@ -4,6 +4,7 @@ package rmit.com.sept.sept.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.com.sept.sept.Company;
+import rmit.com.sept.sept.SeptApplication;
 import rmit.com.sept.sept.Worker;
 import rmit.com.sept.sept.repository.WorkerRepository;
 
@@ -18,20 +19,20 @@ public class WorkerServiceImpl implements WorkerService {
 	WorkerRepository workerRepository;
 	
 	
-	
+	// saves the worker in the database
 	@Override
 	public void saveWorker(Worker worker) {
 		workerRepository.save(worker);
 		
 	}
 	
+	// returns list of all companies
 	@Override
 	public List<Company> list() throws SQLException {
         List<Company> listCategory = new ArrayList<>();
         String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
         String user = "root";
-        String password = "Susstain098.";
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+        try (Connection connection = DriverManager.getConnection(url, user, SeptApplication.sqlPassword)) {
             String sql = "SELECT company_name FROM company";
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);

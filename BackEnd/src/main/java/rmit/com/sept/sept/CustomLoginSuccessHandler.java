@@ -54,5 +54,29 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 		}
 		
 		return url;
+    }
+    
+    protected String userType(Authentication authentication) {
+		String userType = "";
+		
+		// Fetch the roles from Authentication object
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		List<String> roles = new ArrayList<String>();
+		for (GrantedAuthority a : authorities) {
+			System.out.println(a.getAuthority());
+			roles.add(a.getAuthority());
+		}
+		
+		System.out.println(roles);
+
+		// check user role and decide the redirect URL
+		if (roles.contains("ADMIN_USER")) {
+			userType = "ADMIN_USER";
+		} 
+		else if (roles.contains("SITE_USER")) {
+			userType = "SITE_USER";
+		}
+		
+		return userType;
 	}
 }

@@ -15,6 +15,13 @@ public interface UserService {
 
 	public UserRepository getUserRepository();
 
-	public int findByUsername(String username);
+    public int findByUsername(String username);
+    
+    public int findIdLogin(String username);
+
+    public String findUserType(int id);
+
+    public List<User> getList();
+//	void getDetailsForProfile(int id);
 
 }

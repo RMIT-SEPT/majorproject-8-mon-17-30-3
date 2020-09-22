@@ -6,11 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
-import java.util.Date;
 
+/* Booking Class:	
+ * 			This class is used to create a booking table in MYSQL
+ */
 @Entity
 @Table(name = "booking")
 public class Booking {
