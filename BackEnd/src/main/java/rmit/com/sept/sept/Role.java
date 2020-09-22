@@ -46,10 +46,5 @@ public class Role {
 		this.desc = desc;
 	}
 	
-	 public String toString() { 
-			
-		 return "User [ Role: "+role+" ]"; 
-	}  
-	
 	
 }
