@@ -2,9 +2,9 @@ import React,{Component,useEffect,useState} from 'react';
 import './CSS/global.css'
 import axios from 'axios';
 import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
-import Header from './Layout/Header'
+import AdminHeader from './Layout/AdminHeader'
 
-class CreateBooking extends Component {
+class AdminCreateBooking extends Component {
     
     state = {
             serviceName: "",
@@ -48,7 +48,7 @@ class CreateBooking extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err));
         this.props.history.push({
-        pathname: '/CustomerHome',
+        pathname: '/AdminHome',
     });
         
 
@@ -57,7 +57,7 @@ class CreateBooking extends Component {
     render() {
         return (
             <div>
-            <Header/>
+            <AdminHeader/>
             <div className="container-fluid">
                 <div className="row">
                     <div className="content-box col-md-8 m-auto">
@@ -102,7 +102,7 @@ class CreateBooking extends Component {
                         required />
                     </div>
                     <input className="btn btn-success btn-block mt-4" type="submit" value="Create Booking" /> 
-                    <Link to="/CustomerHome" className="btn btn-danger btn-block mt-4">Cancel</Link>
+                    <Link to="/AdminHome" className="btn btn-danger btn-block mt-4">Cancel</Link>
                     </form>        
                 </div>
             </div>
@@ -111,4 +111,4 @@ class CreateBooking extends Component {
         )
     }
 }
-export default CreateBooking;
+export default AdminCreateBooking;

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './CSS/homeStyle.css'
 import logo from './CSS/logo.png'
 import axios from 'axios'
+import Header from './Layout/Header'
 
 class CustomerHome extends Component {
 
@@ -19,39 +20,21 @@ class CustomerHome extends Component {
     }
         render() {
         return (
-            <div className="Home">
-            <form onSubmit={this.handleSubmit}>
-
-             <head>  
-              
-                   <title>View Bookings</title>
-              
-                   </head> 
-              <body>
-                  <header>
-                      <div className="wrapper">
-                          <div className="logo">
-                          <img src={logo} alt="">
-                          </img>
-                              </div>
-                             
-                          </div>
-                          <ul className="nav-area">
-                              {/* <li><a href="/Login">LOGOUT</a></li> */}
-                              <input type="submit" value="Logout" /> 
-                              </ul>
-                              <div className="welcome-text">
-                                  <h1> 
-                                  <a href="#">View Past Bookings</a><br></br>
-                                  <a href="CreateBooking">Create a Booking</a><br></br>
-                                  <a href="Profile">View Details</a><br></br>
-                                      </h1>
-                                  </div>
-                      </header>
-
-              </body>
-              </form>
-            </div>
+            
+        <div className="Home">
+        <Header/>
+            <head>                
+                <title>View Bookings</title>
+            </head> 
+            <body>
+                <header>
+                    <div className="container-fluid col-md-8">
+                        <a className="btn btn-info btn-block" href="CreateBooking">Create a Booking</a>
+                        <a className="btn btn-info btn-block" href="Profile">View Details</a>
+                    </div>
+                </header>
+            </body>
+        </div>
 
         )
     }

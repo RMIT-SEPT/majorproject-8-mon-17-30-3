@@ -1,10 +1,13 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import './CSS/global.css';
+import AdminHeader from './Layout/AdminHeader'
 
 const AllBookings=({data})=>{
     return(
         <>
+        <div>
+        <AdminHeader/>
         <div className="container-fluid">
         <div className="col-md-10 m-auto">
         <table className="table">
@@ -30,12 +33,12 @@ const AllBookings=({data})=>{
                       </tbody>          
                     </table>  
                   </div>
-                
                )
            })
           } 
         
           <br/>
+        </div>
         </div>
         </div>
         </div>

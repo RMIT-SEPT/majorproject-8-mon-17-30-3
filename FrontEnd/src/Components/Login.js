@@ -80,10 +80,10 @@ class Login extends Component {
                                 placeholder="Password" 
                                 required />
                                 <input className="btn btn-success btn-block mt-4" type="submit" value="Sign in" />
-                                        <Link to="Register" class="btn btn-info btn-block mt-4" role="button">Register</Link>
+                                <Link to="Register" class="btn btn-info btn-block mt-4" role="button">Register</Link>
             </form>        
             </div>
-</div>
+        </div>
         )
     }
 }

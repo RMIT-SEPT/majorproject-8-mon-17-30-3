@@ -182,10 +182,7 @@ class Register extends Component {
                     <br />    
                     <div className="row">
                             <div className="col">
-                                <Link to="/Register" class="btn btn-block btn-info" role="button">Login</Link>
-                            </div>
-                            <div className="col">
-                                <Link to="/Home" class="btn btn-block btn-info" role="button">Home</Link>
+                                <Link to="/Login" class="btn btn-block btn-info" role="button">Login</Link>
                             </div>
                         </div>
                 </form>
