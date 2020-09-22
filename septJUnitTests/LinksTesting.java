@@ -9,101 +9,90 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LinksTesting {
 	//WebDriver driver = new ChromeDriver();
 	
 	private static ChromeDriver driver;
-	
+	private static WebDriverWait wait;
 	@BeforeAll
 	public static void setup() {
 		System.setProperty("Webdriver.chrome.driver", "chromedriver.exe");
 		driver = new ChromeDriver();
+		wait = new WebDriverWait(driver, 20);
 
 	}
 	
 	@Test
-	void create_Account_Link_Negative_Test() {
+	void Login_Negative_Test() {
 		driver.get("http://localhost:3000/");
 		String currentUrl = driver.getCurrentUrl();
-		driver.findElement(By.xpath("/html/body/div/div/div/form/a[1]")).click();
+		WebElement element = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/a"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().build().perform();
 		String actualUrl = driver.getCurrentUrl();
 		assertEquals(currentUrl, actualUrl);
 	}
 	
 	@Test
-	void create_Account_Link_Positve_Test() {
+	void Login_Positve_Test() {
 		driver.get("http://localhost:3000/");
-		String currentUrl = "http://localhost:3000/Register";
-		driver.findElement(By.xpath("/html/body/div/div/div/form/a[1]")).click();
+		String currentUrl = driver.getCurrentUrl();
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[1]")).sendKeys("pq@pq.com");;
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[2]")).sendKeys("password");
+		WebElement element = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/a"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().build().perform();
 		String actualUrl = driver.getCurrentUrl();
 		assertEquals(currentUrl, actualUrl);
 	}
 	
-	
-	
 	@Test
-	void Login_Link_From_HomePage() {
-		driver.get("http://localhost:3000/Home");
-		String expected = "http://localhost:3000/Login";
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/body/header/ul/li[3]/a")).click();
-		String actual = driver.getCurrentUrl();
-		assertEquals(expected, actual);
-	}
-	
-	@Test
-	void Register_Link_From_HomePage() {
-		driver.get("http://localhost:3000/Home");
-		String expected = "http://localhost:3000/Login";
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/body/header/ul/li[3]/a")).click();
-		String actual = driver.getCurrentUrl();
-		assertEquals(expected, actual);
-	}
-	
-	@Test
-	void Back_To_Home_From_Register() {
+	void Register_Account_From_Login_Negative_Case() {
 		driver.get("http://localhost:3000/Register");
-		String expected = "http://localhost:3000/Home";
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/a[2]")).click();
+		String expected = driver.getCurrentUrl();
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[1]")).sendKeys("Muhammad");
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[2]")).sendKeys("Tariq");
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[3]")).sendKeys("M@M.com");
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[4]")).sendKeys("password");
+		WebElement element = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[5]"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().build().perform();
 		String actual = driver.getCurrentUrl();
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	void register_Account_Pop_Up_Positive_Case() {
-		driver.get("http://localhost:3000/Register");
-		String expected = "http://localhost:3000/Register";
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[6]")).click();
-		String actual = driver.getCurrentUrl();
-		assertEquals(expected, actual);
+	void Logging_in_registered_account() {
+		driver.get("http://localhost:3000/");
+		String currentUrl = driver.getCurrentUrl();
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[1]")).sendKeys("M@M.com");;
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[2]")).sendKeys("password");
+		WebElement element = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/a"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().build().perform();
+		String actualUrl = driver.getCurrentUrl();
+		assertEquals(currentUrl, actualUrl);
 	}
 	
-	// NOT DEVELOPED FALSE TEST CASE
-	@Test 
-	void register_Account_with_Sending_keys_Negative_Case() {
-		driver.get("http://localhost:3000/Register");
-		String expected = "http://localhost:3000/CustomerHome";
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[1]")).sendKeys("Ali");
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[2]")).sendKeys("ali_tariq1911@hotmail.com");
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[3]")).sendKeys("Muhammad");
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[4]")).sendKeys("Tariq");
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[5]")).sendKeys("Password");
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[6]")).click();
-		String actual = driver.getCurrentUrl();
-		assertEquals(expected, actual);
-	}
-	
-	
+	// Found An Exception Not Clickable
 	@Test
-	void registering_Account_without_Sending_keys_Positive_Case() {
-		driver.get("http://localhost:3000/Register");
-		String expected = "http://localhost:3000/Register";
-		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/input[6]")).click();
-		String actual = driver.getCurrentUrl();
-		assertEquals(expected, actual);
+	void Create_a_Booking() {
+		driver.get("http://localhost:3000/");
+		String currentUrl = driver.getCurrentUrl();
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[1]")).sendKeys("pq@pq.com");;
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/input[2]")).sendKeys("password");
+		WebElement element = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/form/a"));
+		element.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[2]/form/body/header/div[2]/h1/a[2]")));
+		driver.findElement(By.xpath("/html/body/div/div/div[2]/form/body/header/div[2]/h1/a[2]")).click();
+		String actualUrl = driver.getCurrentUrl();
+		assertEquals(currentUrl, actualUrl);
 	}
-	
-	
+
 	@AfterAll
 	public static void closeBrowser() {
 		driver.close();
