@@ -2,6 +2,7 @@ import React,{Component,useEffect,useState} from 'react';
 import './CSS/style.css'
 import loginImg from '../Components/avatar.png'
 import axios from 'axios';
+import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
 class Login extends Component {
     
@@ -61,18 +62,28 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="loginbox">
-                <img src={loginImg} class="avatar"></img>
-                <form onSubmit={this.handleSubmit}>
-               <h1>AGME LOGIN</h1>
-                    <p>Email </p> <input type="text" value={this.state.email} onChange={this.emailhandler} placeholder="Email" required /><br />
-                    <p>Password</p> <input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" required /><br />
-                    <br/><input type="submit" value="Sign in" /> 
-                    <a href="/Register">Create Account</a><br></br><br></br>
-                    <a href="/Home"> Home</a>
+            <div className="registerBox col-md-4 align-items-center bg-dark">
+            <div className="container-fluid">
+               <img src={loginImg} class="avatar"></img>
+                   <form onSubmit={this.handleSubmit}>
+                       <h1>Login</h1> 
+                            <p>Email</p> 
+                                <input type="text" 
+                                value={this.state.email} 
+                                onChange={this.emailhandler} 
+                                placeholder="Email" 
+                                required />
+                            <p>Password</p> 
+                                <input type="password"
+                                value={this.state.password} 
+                                onChange={this.passwordhandler} 
+                                placeholder="Password" 
+                                required />
+                                <input className="btn btn-success btn-block mt-4" type="submit" value="Sign in" />
+                                <Link to="Register" class="btn btn-info btn-block mt-4" role="button">Register</Link>
             </form>        
             </div>
-
+        </div>
         )
     }
 }

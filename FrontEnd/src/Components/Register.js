@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import loginImg from '../Components/avatar.png'
-import './CSS/todo.css'
+import './CSS/global.css'
 import axios from "axios";
+import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
 
 class Register extends Component {
@@ -118,50 +119,53 @@ class Register extends Component {
 
         
         return (
-            <div className="registerBox">
-
+            <div className="registerBox col-md-4 align-items-center bg-dark">
+             <div className="container-fluid">
                 <img src={loginImg} class="avatar"></img>
                 <form onSubmit={this.handleSubmit}>
 
-                    <h1>CREATE AGME ACCOUNT</h1>
+                    <h1 className="form-title">Create an account</h1>
 
-                    <p>FirstName</p>
+                    
+                    <button className="btn btn-primary btn-block mt-2" onClick={()=>this.operation()} >Register as a company</button><br />
+
+                    <p className="form-text">First name</p>
                     <input type="text" value={this.state.name}
                         onChange={this.firsthandler}
-                        placeholder="FirstName" required /><br />
+                        placeholder="First name" required />
 
-                    <p>LastName</p>
+                    <p className="form-text">Last name</p>
                     <input type="text" value={this.state.lastName}
-                        onChange={this.lasthandler} placeholder="LastName" required /><br />
+                        onChange={this.lasthandler} placeholder="Last name" required /><br />
 
-                    <p>Email</p> <input type="text"
+                    <p className="form-text">Email</p> <input type="text"
                         value={this.state.email}
                         onChange={this.emailhandler}
-                        placeholder="Email" required /><br />
+                        placeholder="Email" required />
 
-                    <p>Password</p>
+                    <p className="form-text">Password</p>
                     <input type="password"
                         value={this.state.password}
                         onChange={this.passwordhandler}
-                        placeholder="Password" required /><br />
+                        placeholder="Password" required />
 
                     {this.state.show?
                     <div className="ifYes" >
-                        <p>Company Name</p>
+                        <p className="form-text">Company name</p>
                         <input type="text"
                             value={this.state.companyName}
                             onChange={this.companyNameHandler}
                             placeholder="Company name"
                             class="form-control" />
-                        
-                        <p>Service Name</p>
+
+                        <p className="form-text">Service name</p>    
                         <input type="text"
                             value={this.state.serviceName}
                             onChange={this.serviceNameHandler}
                             placeholder="Service name"
                             class="form-control" />
-                        
-                        <p>Phone Number</p>                      
+
+                        <p className="form-text">Mobile number</p>
                         <input type="text"
                             value={this.state.number}
                             onChange={this.mobileHandler}
@@ -171,16 +175,20 @@ class Register extends Component {
                     </div>
                     :null
                     }
+                    {/* <p>Do You Want To Register as a company</p><br /> */}
                     
-                    
-                    <br /><input type="submit" value="Register Account" />
-                    <button onClick={()=>this.operation()} >Click Here to Register Company</button><br/><br/>
-                    <a href="Login">Back to Login</a><br></br><br></br>
-                    <a href="Home">Home</a>
+                    <br />
+                    <input className="btn btn-success btn-block mt-2" type="submit" value="Register Account" />
+                    <br />    
+                    <div className="row">
+                            <div className="col">
+                                <Link to="/Login" class="btn btn-block btn-info" role="button">Login</Link>
+                            </div>
+                        </div>
                 </form>
 
             </div>
-
+            </div>
         );
     }
 }

@@ -33,7 +33,7 @@ class BookingComponent extends React.Component {
 
                     </thead>
                     <tbody>
-                        {
+                        {/* {
                             this.state.bookings.map(
                                 booking =>
                                    <tr key={booking.booking_id}>
@@ -44,7 +44,7 @@ class BookingComponent extends React.Component {
                                     </tr>
                                 
                             )
-                        }
+                        } */}
 
                     </tbody>
                 </table>
