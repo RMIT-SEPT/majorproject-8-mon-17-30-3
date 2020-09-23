@@ -1,9 +1,11 @@
 package rmit.com.sept.sept.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 import rmit.com.sept.sept.Booking;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -136,6 +139,29 @@ public class AuthenticationController {
 	public Booking createBooking(@RequestBody Booking newBooking) {
 		newBooking.setUserId(userID);
 		return bookingRepository.save(newBooking);
+	}
+	
+	@DeleteMapping("/users/{id}")
+	public void deleteStudent(@PathVariable int id) {
+		userRepository.deleteById(id);
+	}
+	
+	@PutMapping("/editUser/{id}")
+	public ResponseEntity<Object> updateStudent(@RequestBody User user, @PathVariable int id) {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
+		
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		Optional<User> studentOptional = userRepository.findById(id);
+
+		if (!studentOptional.isPresent())
+			return ResponseEntity.notFound().build();
+
+		user.setId(id);
+		
+		userRepository.save(user);
+
+		return ResponseEntity.noContent().build();
 	}
 	
 

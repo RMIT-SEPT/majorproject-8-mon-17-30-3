@@ -17,7 +17,7 @@ public class SeptApplication {
 	public static void main(String[] args) {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
 		String encodedPassword = passwordEncoder.encode("password");
-	
+
 		try { 
 			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
 	        Connection conn = DriverManager.getConnection(url,"root",password);
@@ -26,6 +26,7 @@ public class SeptApplication {
 
 	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(1,'ADMIN_USER','ADMIN_USER')");
 	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(2,'SITE_USER','SITE_USER')");
+
 
 	        conn.close();
 		} catch (Exception e) { 
