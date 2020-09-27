@@ -7,16 +7,12 @@ body{
   font-family: sans-serif;
 }
 .registerBox{
-  width: 320px;
-  height: 620px;
+  width: auto;
+  height: auto;
+  margin: auto;
   background: #000;
   color: #fff;
-  top: 9%;
-  left: 40%;
-  position: absolute;
-  transform: tranlate(-60%,-60%);
-  box-sizing: border-box;
-  padding: 70px 30px;
+
 }
 .avatar{
   width: 100px;
@@ -56,7 +52,7 @@ h1{
   border: none;
   outline: none;
   height: 40px;
-  background: #fb2525;
+  background: blue;
   color: #fff;
   font-size: 18px;
   border-radius: 20px;
@@ -64,9 +60,10 @@ h1{
 }
 .registerBox input[type="submit"]hover{
   cursor: pointer;
-  background: #ffc187;
   color: #000;
+  background: #7b2222;
 }
+
 .registerBox a{
 
   border-radius: 10px;

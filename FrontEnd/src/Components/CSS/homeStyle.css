@@ -54,7 +54,7 @@ text-transform: uppercase;
 }
 .welcome-text h1{
   text-align: center;
-  color: #fff;
+  color:black;
   text-transform: uppercase;
   font-size: 60px;
 }
@@ -103,8 +103,9 @@ text-align: center;
 width: 100%;
 height: auto;
 margin: 30% 0;
+colour: black;
 }
-  .welcome-text h1 {
+.welcome-text h1 {
 font-size: 30px;
 }
 }

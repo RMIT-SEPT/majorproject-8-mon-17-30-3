@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import rmit.com.sept.sept.Booking;
 import rmit.com.sept.sept.Company;
+import rmit.com.sept.sept.SeptApplication;
 import rmit.com.sept.sept.repository.BookingRepository;
 
 import java.sql.ResultSet;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-//	private UserServiceImpl service;
+
 	
 	@Autowired
 	BookingRepository bookingRepository;
@@ -22,11 +23,11 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
     JdbcTemplate template;
 	
+	public SeptApplication main;
+	
 	@Override
 	public void createBooking(Booking booking) {
-//		UserServiceImpl service = new UserServiceImpl();
-//		System.out.println(service.getSessionUserID());
-//		booking.setUserId(service.getSessionUserID());
+
 		bookingRepository.save(booking);
 	}
 
@@ -57,7 +58,7 @@ public class BookingServiceImpl implements BookingService {
                 Booking booking = new Booking(
                 		resultSet.getInt("user_id"),
                 		resultSet.getInt("booking_id"),
-                        resultSet.getString("date"),
+                        resultSet.getDate("date"),
                         resultSet.getString("time"),
                         resultSet.getString("servicename"),
                         resultSet.getString("worker_name"));
@@ -67,6 +68,13 @@ public class BookingServiceImpl implements BookingService {
         };
 
         return template.query(sql, rm);
+	}
+
+	@Override
+	public void deleteBooking(int id) {
+
+		List<Booking> b = getAllBookings();
+		b.removeIf(t -> t.getBookingId() == (id));
 	}
 
 	@Override
@@ -81,6 +89,48 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public BookingRepository getBookingRepository() {
 		return this.bookingRepository;
+	}
+
+	@Override
+	public List<Booking> getUserBooking(int userID) {
+		String sql = "select * from booking where booking.user_id  = '" + userID + "'" ;
+        RowMapper<Booking> rm = new RowMapper<Booking>() {
+            @Override
+            public Booking mapRow(ResultSet resultSet, int i) throws SQLException {
+                Booking booking = new Booking(
+                		resultSet.getInt("user_id"),
+                		resultSet.getInt("booking_id"),
+                        resultSet.getDate("date"),
+                        resultSet.getString("time"),
+                        resultSet.getString("servicename"),
+                        resultSet.getString("worker_name"));
+               
+                return booking;
+            }
+        };
+
+        return template.query(sql, rm);
+	}
+
+	@Override
+	public List<Booking> getPastBooking(int userID) {
+		String sql = "select * from booking where booking.date < CURRENT_DATE() AND booking.user_id  = '" + userID + "'" ;
+        RowMapper<Booking> rm = new RowMapper<Booking>() {
+            @Override
+            public Booking mapRow(ResultSet resultSet, int i) throws SQLException {
+                Booking booking = new Booking(
+                		resultSet.getInt("user_id"),
+                		resultSet.getInt("booking_id"),
+                        resultSet.getDate("date"),
+                        resultSet.getString("time"),
+                        resultSet.getString("servicename"),
+                        resultSet.getString("worker_name"));
+               
+                return booking;
+            }
+        };
+
+        return template.query(sql, rm);
 	}
 
 }

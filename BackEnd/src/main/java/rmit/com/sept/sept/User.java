@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -27,6 +28,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+//@IdClass(CompositeKey.class)
 @Table(name = "user")
 public class User {
 
@@ -53,18 +55,74 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-
+	@Column(name = "isCompany")
+	private boolean isCompany;
+	
+	@Column(name = "isWorker")
+	private boolean isWorker;
+	
 	@Column(name = "status")
 	private String status;
+	
+//	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "company_id")
+	public int company_id;
+
+//	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "worker_id")
+	public int worker_id;
+
+//	@NotNull(message="Company name is compulsory")
+	@Column(name = "company_name")
+	public String company_name;
+
+//	@NotNull(message="Service name is compulsory")
+	@Column(name = "service_name")
+	public String service_name;
+	
+	@Column(name = "number")
+	public String number;
+	
+	public String userType;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
 	private Set<Role> roles;
+	
+	public User(String firstname, String lastname, String email) {
+		this.name = firstname;
+		this.lastName = lastname;
+		this.email = email;
+    }
+    
+    public User(String email) {
+		this.email = email;
+    }
+    
+    public User(String email, String userType ) {
+    	this.email = email;
+    	this.userType = userType;
+    }
+    
+    
+	
+	public User() {
+		
+	}
 
 	public int getId() {
 		return id;
 	}
 
+	public boolean getIsCompany() {
+		return isCompany;
+	}
+	
+	public void setIsCompany(boolean isCompany) {
+		this.isCompany = isCompany;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -72,9 +130,32 @@ public class User {
 	public String getName() {
 		return name;
 	}
+	
+	public String getCompanyName() {
+		return company_name;
+	}
+	
+	public String getServiceName() {
+		return service_name;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setCompanyName(String company_name) {
+		this.company_name = company_name;
+	}
+	public void setServiceName(String service_name) {
+		this.service_name = service_name;
+	}
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getLastName() {
@@ -116,6 +197,19 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+	public boolean getWorker() {
+		return isWorker;
+	}
+	
+	public void setWorker(boolean worker) {
+		this.isWorker = worker;
+	}
+	
+	 public String toString() { 
+		
+	      return "User [ name: "+email+", password: "+ password + " , :user_type :admin]"; 
+	 }  
 	
 
 }

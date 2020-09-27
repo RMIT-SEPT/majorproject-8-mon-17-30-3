@@ -35,13 +35,13 @@ public class Booking {
 	public String status;
 
 	@Column(name = "date")
-	public String date;
+	public Date date;
 
 	@Column(name = "time")
 	public String time;
 	
 	
-	public Booking(int user_id,int booking_id,String date, String time,String serviceName, String workerName) {
+	public Booking(int user_id,int booking_id,Date date, String time,String serviceName, String workerName) {
 		this.user_id = user_id;
 		this.booking_id = booking_id;
 		this.date = date;
@@ -96,12 +96,12 @@ public class Booking {
 		this.status = status;
 	}
 
-	public void setDate(String currentDate){
+	public void setDate(Date currentDate){
 		this.date = currentDate;
 
 	}
 
-	public String getDate(){
+	public Date getDate(){
 		return this.date;
 
 	}

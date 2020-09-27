@@ -1,21 +1,18 @@
 package rmit.com.sept.sept;
 
-import java.security.Principal;
-
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -46,32 +43,50 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
+		http.csrf().disable().authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").permitAll()
 				.antMatchers("/register").permitAll()
-				.antMatchers("/registerWorker").permitAll()
+                .antMatchers("/registerWorker").permitAll()
+                .antMatchers("/bookings").permitAll()
+                .antMatchers("/createUser").permitAll()
+                .antMatchers("/getUserBooking").permitAll()
+                .antMatchers("/getPastBooking").permitAll()
+                .antMatchers("/users/{id}").permitAll()
+                .antMatchers("/editUser/{id}").permitAll()
+                .antMatchers("/createBooking").permitAll()
+                .antMatchers("/createWorker").permitAll()
+                .antMatchers("/loginUser").permitAll()
+				.antMatchers("/logoutUser").permitAll()
+                .antMatchers("/profile").permitAll()                
+				.antMatchers(HttpMethod.GET,"/bookings").permitAll()
+				.antMatchers(HttpMethod.DELETE,"/booking/**").permitAll()
 				.antMatchers("/home/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
 				.antMatchers("/admin/**").hasAnyAuthority("SUPER_USER","ADMIN_USER")
 				.anyRequest().authenticated()
 				.and()
-				.csrf().disable().formLogin()
-				.loginPage("/login")
+                .httpBasic()
+				.and()
+				.csrf().disable().formLogin().permitAll()
+				.loginPage("/login")			
 				.failureUrl("/login?error=true")
-				.successHandler(sucessHandler)
+				.successHandler(sucessHandler)			
 				.usernameParameter("email")
 				.passwordParameter("password")
+				.and()
+                .httpBasic()
 				.and()
 				.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and()
-				.exceptionHandling()
+				.exceptionHandling()				
 				.accessDeniedPage("/access-denied");
+		  		
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**") ;
 	}
 
 }

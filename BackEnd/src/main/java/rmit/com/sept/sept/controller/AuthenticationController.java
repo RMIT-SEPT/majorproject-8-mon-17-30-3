@@ -1,228 +1,227 @@
 package rmit.com.sept.sept.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.servlet.ModelAndView;
 import rmit.com.sept.sept.Booking;
-import rmit.com.sept.sept.Company;
+import rmit.com.sept.sept.CustomLoginSuccessHandler;
+import rmit.com.sept.sept.Role;
 import rmit.com.sept.sept.User;
 import rmit.com.sept.sept.Worker;
+import rmit.com.sept.sept.repository.BookingRepository;
+import rmit.com.sept.sept.repository.RoleRepository;
+import rmit.com.sept.sept.repository.UserRepository;
+import rmit.com.sept.sept.repository.WorkerRepository;
 import rmit.com.sept.sept.service.BookingService;
 import rmit.com.sept.sept.service.UserService;
-import rmit.com.sept.sept.service.WorkerService;
-
-import javax.validation.Valid;
-import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
 public class AuthenticationController {
 
-	@Autowired
-	UserService userService;
-	
-	@Autowired
-	BookingService bookingService;
-	
-	@Autowired
-	WorkerService workerService;
-	
-	private int userId;
 	
 	
+	private final UserRepository userRepository;
 
-	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-	public ModelAndView login() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login"); // resources/template/login.htm
-		return modelAndView;
-	}
+	private final RoleRepository roleRepository;
 
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView register() {
-		ModelAndView modelAndView = new ModelAndView();
-		User user = new User();
-		modelAndView.addObject("user", user);
-		modelAndView.setViewName("register"); // resources/template/register.html
-		return modelAndView;
-	}
+	private final BCryptPasswordEncoder encoder;
+
+	private final UserService userService;
+
+	private final BookingRepository bookingRepository;
 	
-	@RequestMapping(value = "/registerWorker", method = RequestMethod.GET)
-	public ModelAndView registerWorker(Model model) throws SQLException {
-		ModelAndView modelAndView = new ModelAndView();
-		Worker worker = new Worker();
-		 List<Company> listCat  = workerService.list();
-		 model.addAttribute("listCat",listCat);
-		modelAndView.addObject("worker", worker);
-		modelAndView.setViewName("registerWorker"); // resources/template/registerWorker.html
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/createBooking", method = RequestMethod.GET)
-	public ModelAndView booking() {
-		
-		ModelAndView modelAndView = new ModelAndView();
-		Booking booking = new Booking();
-		modelAndView.addObject("booking", booking);
-		modelAndView.setViewName("createBooking"); // resources/template/register.html
-		return modelAndView;
-	}
-	
-	   @ModelAttribute("companyList")
-	   public List<Company> getNumbersList() throws SQLException {
-	      List<Company> companyList = workerService.list();
-	      System.out.println(companyList.size());
-	      return companyList;
-	   }
+	private final WorkerRepository workerRepository;
+
+	private int userID;
+
+	private final BookingService bookingService;
+
+	private final CustomLoginSuccessHandler custom;
 
 
 	
-	
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView home() {
-		System.out.println(RequestContextHolder.currentRequestAttributes().getSessionId());
-		ModelAndView modelAndView = new ModelAndView();
-		
-		final Object currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
-		String convertedToString = String.valueOf(currentUserName);
-		System.out.println(userService.findByUsername(convertedToString));
-		userId = userService.findByUsername(convertedToString);
-//		System.out.println(currentUserName);
-		modelAndView.setViewName("home"); // resources/template/home.html
-		return modelAndView;
+	public AuthenticationController(UserRepository userRepository, RoleRepository roleRepository,
+			BCryptPasswordEncoder encoder, UserService userService, CustomLoginSuccessHandler custom,
+			BookingRepository bookingRepository, BookingService bookingService, WorkerRepository workerRepository) {
+		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
+		this.encoder = encoder;
+		this.userService = userService;
+		this.custom = custom;
+		this.bookingRepository = bookingRepository;
+		this.bookingService = bookingService;
+		this.workerRepository=workerRepository;
 	}
-
 	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ModelAndView adminHome() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin"); // resources/template/admin.html
-		return modelAndView;
-	}
+	@PostMapping("/createWorker")
+	public Worker registerWorker(@RequestBody Worker newWorker) {
+		newWorker.setPassword(encoder.encode(newWorker.getPassword()));
+		return workerRepository.save(newWorker);
 
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public ModelAndView registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
-		ModelAndView modelAndView = new ModelAndView();
-		// Check for the validations
-		if(bindingResult.hasErrors()) {
-			modelAndView.addObject("successMessage", "Please correct the errors in form!");
-			modelMap.addAttribute("bindingResult", bindingResult);
+	}
+	
+	// returns a json containing information of the bookings
+	@GetMapping("/bookings")
+	public String booking() {
+		List<Booking> bookingList = bookingService.getAllBookings();
+		String jsonString = "{\"data\":[";
+
+		for (int i = 0; i < bookingList.size(); i++) {
+			jsonString += "{\"bookingID\":\"" + bookingList.get(i).getBookingId() + "\",\"serviceName\":\""
+					+ bookingList.get(i).getServiceName() + "\",\"workerName\":\"" + bookingList.get(i).getWorkerName()
+					+ "\",\"date\":\"" + bookingList.get(i).getDate() + "\",\"time\":\"" + bookingList.get(i).getTime();
+
+			if (i != bookingList.size() - 1) {
+				jsonString += "\"},";
+			}
 		}
-		else if(userService.isUserPresent(user.getId())){
-			modelAndView.addObject("successMessage", "user already exists!");			
+
+		jsonString += "\"}]}";
+		return jsonString;
+	}
+
+	// logs user out from the system
+	@GetMapping("/logoutUser")
+	public String fetchSignoutSite(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		// we will save the user if, no binding errors
+		userID = 0;
+		return "redirect:/login?logout";
+	}
+
+	// returns the the type of user logging in for authentication
+	@PostMapping("/loginUser")
+	public String login(@RequestBody User newUser) {
+	
+		int id = userService.findIdLogin(newUser.getEmail());
+		userID = id;
+		String userType = userService.findUserType(id);
+		System.out.println(userID);
+
+		String jsonString = "{\"email\":\"" + newUser.getEmail() + "\", \"userType\":\"" + userType + "\"}";
+
+		return jsonString;
+
+	}
+
+	// returns json of email, first name and last name
+	@GetMapping("/profile")
+	public String profile() {
+		List<User> userList = userService.getUserDetails(userID);
+		String jsonString = "{\"email\":\"" + userList.get(0).getEmail() + "\"," + " \"firstName\":\""
+				+ userList.get(0).getName() + "\"," + " \"lastName\":\"" + userList.get(0).getLastName() + "\"}";
+
+		return jsonString;
+	}
+	
+	// Registers a user
+	@PostMapping("/createUser")
+	public User registerUser(@RequestBody User newUser) {
+		newUser.setPassword(encoder.encode(newUser.getPassword()));
+		newUser.setStatus("VERIFIED");
+
+		if (newUser.getCompanyName() == null) {
+			Role userRole = roleRepository.findByRole("SITE_USER");
+			newUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		}
+		else if(newUser.getServiceName() == null) {
+			newUser.setIsCompany(true);
+			Role userRole = roleRepository.findByRole("ADMIN_USER");
+			newUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		}
 		else {
-			userService.saveUser(user);
-			modelAndView.addObject("successMessage", "User is registered successfully!");
+			newUser.setWorker(true);
+			Role userRole = roleRepository.findByRole("WORKER_USER");
+			newUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		}
-		modelAndView.addObject("user", new User());
+	
 		
-		modelAndView.setViewName("login");
-		return modelAndView;
+		return userRepository.save(newUser);
+
 	}
 	
-	@RequestMapping(value="/registerWorker", method=RequestMethod.POST)
-	public ModelAndView registerWorker2(@Valid Worker worker, BindingResult bindingResult, ModelMap modelMap) {
-		ModelAndView modelAndView = new ModelAndView();
-		// Check for the validations
-		if(bindingResult.hasErrors()) {
-			modelAndView.addObject("successMessage", "Please correct the errors in form!");
-			modelMap.addAttribute("bindingResult", bindingResult);
-		}
-		
-		
-//		else if(userService.isUserPresent(user)){
-//			modelAndView.addObject("successMessage", "user already exists!");			
-//		}
-//		// we will save the user if, no binding errors
-//		else {
-//			userService.saveUser(user);
-//			modelAndView.addObject("successMessage", "User is registered successfully!");
-//		}
-//		modelAndView.addObject("user", new User());
-		
-		modelAndView.setViewName("login");
-		return modelAndView;
+	// Creates a Booking For the User 
+	@PostMapping("/createBooking")
+	public Booking createBooking(@RequestBody Booking newBooking) {
+		newBooking.setUserId(userID);
+		return bookingRepository.save(newBooking);
 	}
 	
-	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login"); // resources/template/login.html
-		return modelAndView;
+	@GetMapping("/getUserBooking")
+	public String getUserBooking() {
+		List<Booking> userBookings = bookingService.getUserBooking(6);
+		String jsonString = "{\"data\":[";
+
+		for (int i = 0; i < userBookings.size(); i++) {
+			jsonString += "{\"bookingID\":\"" + userBookings.get(i).getBookingId() + "\",\"serviceName\":\""
+					+ userBookings.get(i).getServiceName() + "\",\"workerName\":\"" + userBookings.get(i).getWorkerName()
+					+ "\",\"date\":\"" + userBookings.get(i).getDate() + "\",\"time\":\"" + userBookings.get(i).getTime();
+
+			if (i != userBookings.size() - 1) {
+				jsonString += "\"},";
+			}
+		}
+
+		jsonString += "\"}]}";
+		return jsonString;
 	}
 	
-	@RequestMapping(value="/createBooking", method=RequestMethod.POST)
-	public ModelAndView createBooking(@Valid Booking booking) {
-		ModelAndView modelAndView = new ModelAndView();
-//		// Check for the validations
-//		if(bindingResult.hasErrors()) {
-//			modelAndView.addObject("successMessage", "Please correct the errors in form!");
-//			modelMap.addAttribute("bindingResult", bindingResult);
-//		}
-//		
-		// we will save the user if, no binding errors
-//		else {
+	@GetMapping("/getPastBooking")
+	public String getPastBooking() {
+		List<Booking> userBookings = bookingService.getPastBooking(6);
+		String jsonString = "{\"data\":[";
+
+		for (int i = 0; i < userBookings.size(); i++) {
+			jsonString += "{\"bookingID\":\"" + userBookings.get(i).getBookingId() + "\",\"serviceName\":\""
+					+ userBookings.get(i).getServiceName() + "\",\"workerName\":\"" + userBookings.get(i).getWorkerName()
+					+ "\",\"date\":\"" + userBookings.get(i).getDate() + "\",\"time\":\"" + userBookings.get(i).getTime();
+
+			if (i != userBookings.size() - 1) {
+				jsonString += "\"},";
+			}
+		}
+
+		jsonString += "\"}]}";
+		return jsonString;
+	}
+	
+	@DeleteMapping("/users/{id}")
+	public void deleteStudent(@PathVariable int id) {
+		userRepository.deleteById(id);
+	}
+	
+	@PutMapping("/editUser/{id}")
+	public ResponseEntity<Object> updateStudent(@RequestBody User user, @PathVariable int id) {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
 		
-			booking.setUserId(userId);
-			bookingService.createBooking(booking);
-			modelAndView.addObject("successMessage", "Booking successfully!");
-//		}
-		modelAndView.addObject("booking", new Booking());
-		modelAndView.setViewName("home");
-		return modelAndView;
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		Optional<User> studentOptional = userRepository.findById(id);
+
+		if (!studentOptional.isPresent())
+			return ResponseEntity.notFound().build();
+
+		user.setId(id);
+		
+		userRepository.save(user);
+
+		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(value = "company", method = RequestMethod.GET)
-    public String company(@RequestParam (value = "search", required = false) String service_name, Model md){
-        md.addAttribute("search", bookingService.findAllCompany(service_name));
-        return "company";
-    }
-	
-	@RequestMapping(value = "/bookings", method = RequestMethod.GET)
-    public String booking(Model md){
-        md.addAttribute("booking", bookingService.getAllBookings());
 
-        return "bookings";
-    }
-
-	@RequestMapping(value = "/user{id}", method=RequestMethod.GET)
-	@ResponseBody
-	public User getUser(@PathVariable Integer id){
-
-		if(userService.isUserPresent(id)){
-			Optional<User> optional = userService.getUserRepository().findById(id);
-			User myUser = optional.get();
-			//userMap.put(id, userResponse);
-			return myUser;
-		}
-		else{
-			throw new RuntimeException("User doesn't exists");
-		}
-	}
-
-	@RequestMapping(value = "/booking{id}", method=RequestMethod.GET)
-	@ResponseBody
-	public Booking getBooking(@PathVariable Integer id){
-
-		if(bookingService.isBookingPresent(id)){
-			Optional<Booking> optional = bookingService.getBookingRepository().findById(id);
-			Booking myBooking = optional.get();
-			//userMap.put(id, userResponse);
-			return myBooking;
-		}
-		else{
-			throw new RuntimeException("Booking doesn't exists");
-		}
-	}
 
 }
-
