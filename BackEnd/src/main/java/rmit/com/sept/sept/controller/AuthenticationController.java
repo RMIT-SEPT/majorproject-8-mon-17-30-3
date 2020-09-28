@@ -222,6 +222,11 @@ public class AuthenticationController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@DeleteMapping("/deleteBooking/{id}")
+	public void deleteBoooking(@PathVariable int id) {
+		bookingRepository.deleteById(id);
+	}
+	
 
 
 }
