@@ -101,6 +101,12 @@ public class User {
 		this.email = email;
     }
     
+    public User(int company_id, int worker_id) {
+ 		this.company_id = company_id;
+ 		this.worker_id = worker_id;
+     }
+     
+     
     public User(String email, String userType ) {
     	this.email = email;
     	this.userType = userType;
@@ -205,6 +211,15 @@ public class User {
 	public void setWorker(boolean worker) {
 		this.isWorker = worker;
 	}
+	
+	public void setCompanyID(int companyID) {
+		this.company_id = companyID;
+	}
+	
+	public void setWorkerID(int workerID) {
+		this.worker_id = workerID;
+	}
+	
 	
 	 public String toString() { 
 		

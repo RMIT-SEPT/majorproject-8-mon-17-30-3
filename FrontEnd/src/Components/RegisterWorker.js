@@ -69,7 +69,6 @@ class RegisterWorker extends Component {
             number: this.state.number,
             email: this.state.email,
             password: this.state.password,
-            serviceName: this.state.servicename
         };
         axios
             .post("http://localhost:8080/createUser", worker)
@@ -128,13 +127,6 @@ class RegisterWorker extends Component {
                             value={this.state.number}
                             onChange={this.mobileHandler}
                             placeholder="Number"
-                            class="form-control" />
-
-                        <p className="form-text">Service Name</p>
-                        <input type="text"
-                            value={this.state.servicename}
-                            onChange={this.serviceHandler}
-                            placeholder="Service Name"
                             class="form-control" />
                                    
                     <br />

@@ -13,6 +13,7 @@ class Register extends Component {
         lastName: "",
         password: "",
         companyName: "",
+        serviceName: "",
         number: "",
         isRegistered: false,
         show: false
@@ -45,6 +46,12 @@ class Register extends Component {
         });
     };
 
+    serviceNameHandler = (event) => {
+        this.setState({
+            serviceName: event.target.value
+        });
+    };
+
     mobileHandler = (event) => {
         this.setState({
             number: event.target.value
@@ -65,6 +72,7 @@ class Register extends Component {
             lastName: this.state.lastName,
             email: this.state.email,
             password: this.state.password,
+            serviceName: this.state.serviceName,
             companyName: this.state.companyName,
             number: this.state.number,
         };
@@ -148,6 +156,13 @@ class Register extends Component {
                             value={this.state.companyName}
                             onChange={this.companyNameHandler}
                             placeholder="Company name"
+                            class="form-control" />
+
+                    <p className="form-text">Service Name</p>
+                        <input type="text"
+                            value={this.state.serviceName}
+                            onChange={this.serviceNameHandler}
+                            placeholder="Service Name"
                             class="form-control" />
 
                         <p className="form-text">Mobile number</p>

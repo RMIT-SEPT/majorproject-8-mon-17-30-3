@@ -23,5 +23,11 @@ public interface UserService {
 
     public List<User> getList();
 //	void getDetailsForProfile(int id);
+    
+    public List<User> getRegisteredCompanyID();
+    
+    public List<User> getRegisteredWorkerID();
+
+    
 
 }

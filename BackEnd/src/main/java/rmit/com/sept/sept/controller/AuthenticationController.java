@@ -131,21 +131,38 @@ public class AuthenticationController {
 	// Registers a user
 	@PostMapping("/createUser")
 	public User registerUser(@RequestBody User newUser) {
+		List<User> userList = userService.getRegisteredCompanyID();
+		List<User> workerList = userService.getRegisteredWorkerID();
+		
+		int registeredCompanyID = userList.get(userList.size()-1).company_id; 
+		
+		int registeredWorkerID = workerList.get(workerList.size()-1).worker_id;
+			
 		newUser.setPassword(encoder.encode(newUser.getPassword()));
 		newUser.setStatus("VERIFIED");
 
 		if (newUser.getCompanyName() == null) {
+			newUser.setCompanyID(registeredCompanyID);
+			newUser.setWorkerID(registeredWorkerID);
+
 			Role userRole = roleRepository.findByRole("SITE_USER");
 			newUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		}
 		else if(newUser.getServiceName() == null) {
-			newUser.setIsCompany(true);
-			Role userRole = roleRepository.findByRole("ADMIN_USER");
-			newUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		}
-		else {
+			newUser.setCompanyID(registeredCompanyID);
+			newUser.setWorkerID(registeredWorkerID+1);
+
 			newUser.setWorker(true);
 			Role userRole = roleRepository.findByRole("WORKER_USER");
+			newUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
+		}
+		else {
+			newUser.setCompanyID(registeredCompanyID+1);
+			newUser.setWorkerID(registeredWorkerID);
+
+			newUser.setIsCompany(true);
+			Role userRole = roleRepository.findByRole("ADMIN_USER");
 			newUser.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		}
 	
@@ -222,6 +239,10 @@ public class AuthenticationController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@DeleteMapping("/deleteBooking/{id}")
+	public void deleteBoooking(@PathVariable int id) {
+		bookingRepository.deleteById(id);
+	}
 
 
 }

@@ -200,6 +200,34 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
+	@Override
+	public List<User> getRegisteredCompanyID() {
+		String sql = "select user.company_id from user";
+        RowMapper<User> rm = new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user = new User(resultSet.getInt("company_id"), 0);
+                return user;
+            }
+        };
+
+        return template.query(sql, rm);
+	}
+
+	@Override
+	public List<User> getRegisteredWorkerID() {
+		String sql = "select user.worker_id from user";
+        RowMapper<User> rm = new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user = new User(0, resultSet.getInt("worker_id"));
+                return user;
+            }
+        };
+
+        return template.query(sql, rm);
+	}
+
 
 	
 
