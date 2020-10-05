@@ -19,6 +19,8 @@ public interface UserService {
     
     public int findIdLogin(String username);
 
+    public String findIdName(String username);
+
     public String findUserType(int id);
 
     public List<User> getList();

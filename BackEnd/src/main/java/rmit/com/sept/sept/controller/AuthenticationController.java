@@ -1,6 +1,5 @@
 package rmit.com.sept.sept.controller;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,8 +29,6 @@ import java.util.Optional;
 @RestController
 public class AuthenticationController {
 
-	
-	
 	private final UserRepository userRepository;
 
 	private final RoleRepository roleRepository;
@@ -45,6 +42,8 @@ public class AuthenticationController {
 	private final WorkerRepository workerRepository;
 
 	private int userID;
+	
+	private String workerName = "";
 
 	private final BookingService bookingService;
 
@@ -111,7 +110,12 @@ public class AuthenticationController {
 		userID = id;
 		String userType = userService.findUserType(id);
 		System.out.println(userID);
-
+		System.out.println(userType);
+		if(userType.equals("WORKER_USER")) {
+			List<User> userList = userService.getUserDetails(userID);
+			workerName = userList.get(0).getName();
+			System.out.println(workerName);
+		}
 		String jsonString = "{\"email\":\"" + newUser.getEmail() + "\", \"userType\":\"" + userType + "\"}";
 
 		return jsonString;
@@ -126,6 +130,11 @@ public class AuthenticationController {
 				+ userList.get(0).getName() + "\"," + " \"lastName\":\"" + userList.get(0).getLastName() + "\"}";
 
 		return jsonString;
+	}
+	
+	@GetMapping("/acceptWorker")
+	public void acceptWorker() {
+		
 	}
 	
 	// Registers a user
@@ -180,7 +189,7 @@ public class AuthenticationController {
 	
 	@GetMapping("/getUserBooking")
 	public String getUserBooking() {
-		List<Booking> userBookings = bookingService.getUserBooking(6);
+		List<Booking> userBookings = bookingService.getUserBooking(userID);
 		String jsonString = "{\"data\":[";
 
 		for (int i = 0; i < userBookings.size(); i++) {
@@ -199,7 +208,7 @@ public class AuthenticationController {
 	
 	@GetMapping("/getPastBooking")
 	public String getPastBooking() {
-		List<Booking> userBookings = bookingService.getPastBooking(6);
+		List<Booking> userBookings = bookingService.getPastBooking(userID);
 		String jsonString = "{\"data\":[";
 
 		for (int i = 0; i < userBookings.size(); i++) {
@@ -244,7 +253,24 @@ public class AuthenticationController {
 		bookingRepository.deleteById(id);
 	}
 
-	
+	@GetMapping("/getWorkerBooking")
+	public String getWorkerBooking() {
+		List<Booking> userBookings = bookingService.getWorkerBooking(workerName);
+		System.out.println(userBookings.size());
+		String jsonString = "{\"data\":[";
 
+		for (int i = 0; i < userBookings.size(); i++) {
+			jsonString += "{\"bookingID\":\"" + userBookings.get(i).getBookingId() + "\",\"serviceName\":\""
+					+ userBookings.get(i).getServiceName() + "\",\"workerName\":\"" + userBookings.get(i).getWorkerName()
+					+ "\",\"date\":\"" + userBookings.get(i).getDate() + "\",\"time\":\"" + userBookings.get(i).getTime();
+
+			if (i != userBookings.size() - 1) {
+				jsonString += "\"},";
+			}
+		}
+
+		jsonString += "\"}]}";
+		return jsonString;
+	}
 
 }

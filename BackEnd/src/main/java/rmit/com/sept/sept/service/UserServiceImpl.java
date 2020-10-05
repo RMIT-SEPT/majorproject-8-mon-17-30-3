@@ -228,6 +228,31 @@ public class UserServiceImpl implements UserService {
         return template.query(sql, rm);
 	}
 
+	@Override
+	public String findIdName(String name) {
+        String id = "";
+		try {
+			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+	        Connection conn = DriverManager.getConnection(url,"root",main.getPassword());
+	        Statement st = conn.createStatement(); 
+	        ResultSet rs;
+	        
+            rs = st.executeQuery("SELECT user_id FROM user WHERE user.firstname ='"+name+"'");
+            while ( rs.next() ) {
+                 id = rs.getString("firstname");
+                 
+                System.out.println(id);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+		
+		return id;
+      
+	}
+
 
 	
 

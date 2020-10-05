@@ -23,4 +23,7 @@ public interface BookingService {
 	
 	public List<Booking> getPastBooking(int userID);
 	
+	public List<Booking> getWorkerBooking(String workerName);
+
+	
 }

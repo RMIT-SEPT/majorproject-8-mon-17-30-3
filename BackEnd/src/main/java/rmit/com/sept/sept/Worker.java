@@ -23,7 +23,8 @@ public class Worker {
 	@NotNull(message="Worker name is compulsory")
 	@Column(name = "worker_name")
 	public String worker_name;
-
+	
+	
 	
 	@Column(name = "company_name")
 	public String company_name;
