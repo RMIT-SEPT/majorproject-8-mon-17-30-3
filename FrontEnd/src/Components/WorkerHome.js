@@ -29,7 +29,8 @@ class WorkerHome extends Component {
             <body>
                 <header>
                     <div className="container-fluid col-md-8">
-                        <a className="btn btn-info btn-block" href="Profile">View Details</a>
+                        <a className="btn btn-info btn-block" href="WorkerProfile">View Details</a>
+                        <a className="btn btn-info btn-block" href="WorkerBookings">View My Schedule</a>
                     </div>
                 </header>
             </body>

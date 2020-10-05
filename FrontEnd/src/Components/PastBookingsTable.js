@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import './CSS/global.css';
 import AdminHeader from './Layout/AdminHeader'
+import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
 const PastBookingsTable=({data})=>{
     return(
@@ -41,6 +42,8 @@ const PastBookingsTable=({data})=>{
         </div>
         </div>
         </div>
+        <Link to="CustomerHome" class="btn btn-info mt-4" role="button">Customer Home</Link>
+
         </div>
         </>
     )

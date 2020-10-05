@@ -2,7 +2,7 @@ import React,{Component,useEffect,useState} from 'react';
 import axios from 'axios';
 import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 import Header from './Layout/Header';
-const Profile=()=>{
+const WorkerProfile=()=>{
     const [Data,setData]=useState({
         email:'',
         firstName:'',
@@ -19,7 +19,6 @@ const Profile=()=>{
                 console.log(err);
             })
     },[])
-    
     return(
         <div>
         <Header/>
@@ -30,7 +29,7 @@ const Profile=()=>{
                         <hr />
                             <h4>Your name:</h4><p> {Data.firstName} {Data.lastName}</p>
                             <h4>Email:</h4><p> {Data.email}</p>
-                            <Link to="CustomerHome" class="btn btn-info mt-4" role="button">Customer Home</Link>
+                            <Link to="WorkerHome" class="btn btn-info mt-4" role="button">Worker Home</Link>
                 </div>
            </div>
         </div>
@@ -38,4 +37,4 @@ const Profile=()=>{
     )
 }
 
-export default Profile;
+export default WorkerProfile;

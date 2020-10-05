@@ -4,7 +4,8 @@ import './CSS/global.css';
 import AdminHeader from './Layout/AdminHeader'
 import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 
-const AllBookings=({data})=>{
+
+const WorkerBookingsTable=({data})=>{
     return(
         <>
         <div>
@@ -13,10 +14,8 @@ const AllBookings=({data})=>{
         <div className="col-md-10 m-auto">
         <table className="table">
           <thead>
-          <th>Booking ID</th>
-          <th>Date </th>
-          <th>Service Name</th>
           <th>Worker Name</th>
+          <th>Date </th>
           <th>Time</th>
           </thead>
         </table>
@@ -26,10 +25,8 @@ const AllBookings=({data})=>{
                     <div>
                     <table className="table">         
                       <tbody>
-                        <td className="text-center" >{d.bookingID}</td>
-                        <td className="text-center">{d.date}</td>
-                        <td className="text-center">{d.serviceName}</td>
                         <td className="text-center">{d.workerName}</td>
+                        <td className="text-center">{d.date}</td>
                         <td className="text-center">{d.time}</td>
                       </tbody>          
                     </table>  
@@ -42,11 +39,11 @@ const AllBookings=({data})=>{
         </div>
         </div>
         </div>
-        <Link to="AdminHome" class="btn btn-info mt-4" role="button">Admin Home</Link>
+        <Link to="WorkerHome" class="btn btn-info mt-4" role="button">Worker Home</Link>
 
         </div>
         </>
     )
 }
 
-export default AllBookings;
+export default WorkerBookingsTable;

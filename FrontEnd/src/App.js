@@ -24,6 +24,8 @@ import WorkerHome from './Components/WorkerHome'
 import UserBookingsTable from './Components/UserBookingTable'
 import UserBookings from './Components/UserBookings'
 import PastBookings from './Components/PastBookings'
+import WorkerProfile from './Components/WorkerProfile'
+import WorkerBookings from './Components/WorkerBookings'
 
 function App() {
   
@@ -50,7 +52,11 @@ function App() {
               <Route path="/AdminCreateBooking" component={AdminCreateBooking}></Route>
               <Route path="/Bookings" component={Bookings}></Route>       
               <Route path="/UserBookings" component={UserBookings}></Route>       
-              <Route path="/PastBookings" component={PastBookings}></Route>       
+              <Route path="/PastBookings" component={PastBookings}></Route>
+              <Route path="/WorkerProfile" component={WorkerProfile}></Route>
+              <Route path="/WorkerBookings" component={WorkerBookings}></Route>       
+       
+       
           </Switch>
       </BrowserRouter> 
     </div>
