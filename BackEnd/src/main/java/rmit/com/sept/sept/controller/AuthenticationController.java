@@ -247,7 +247,27 @@ public class AuthenticationController {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+	//added to resend non changed field for edit user put request
+	@GetMapping("/getAll")
+	public String getAll() {
+		List<User> userList = userService.getAllUserDetails(userID);
+		String jsonString = "{\"user_id\":\"" + userID + "\","
+				+ " \"company_id\":\"" + userList.get(0).getCompanyID()+ "\","
+				+ " \"company_name\":\"" + userList.get(0).getCompanyName() + "\","
+				+ " \"email\":\"" + userList.get(0).getEmail() + "\","
+				+ " \"is_company\":\"" + userList.get(0).getIsCompany()+ "\","
+				+ " \"is_worker\":\"" + userList.get(0).getIsWorker() + "\","
+				+ " \"lastname\":\"" + userList.get(0).getLastName() + "\","
+				+ " \"firstname\":\"" + userList.get(0).getName() + "\","
+				+ " \"number\":\"" + userList.get(0).getNumber() + "\","
+				+ " \"password\":\"" + userList.get(0).getPassword() + "\","
+				+ " \"service_name\":\"" + userList.get(0).getServiceName() + "\","
+				+ " \"status\":\"" + userList.get(0).getStatus() + "\","
+				+ " \"user_type\":\"" + userList.get(0).getUserType() + "\","
+				+ " \"worker_id\":\"" + userList.get(0).getWorkerID() + "\"}";
+
+		return jsonString;
+	}
 	@DeleteMapping("/deleteBooking/{id}")
 	public void deleteBoooking(@PathVariable int id) {
 		bookingRepository.deleteById(id);

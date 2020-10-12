@@ -26,6 +26,7 @@ import UserBookings from './Components/UserBookings'
 import PastBookings from './Components/PastBookings'
 import WorkerProfile from './Components/WorkerProfile'
 import WorkerBookings from './Components/WorkerBookings'
+import EditProfile from './Components/EditProfile'
 
 function App() {
   
@@ -42,6 +43,7 @@ function App() {
               <Route path="/Home" component={Home}></Route>
               <Route path="/CustomerHome" component={CustomerHome}></Route>
               <Route path="/Profile" component={Profile}></Route>
+              <Route path="/EditProfile" component={EditProfile}></Route>
               <Route path="/CreateBooking" component={CreateBooking}></Route>
               <Route path="/About" component={About}></Route>
               <Route path="/Contact" component={Contact}></Route>

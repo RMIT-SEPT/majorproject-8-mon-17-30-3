@@ -10,7 +10,9 @@ public interface UserService {
 	public void saveUser(User user);
 	
 	public List<User> getUserDetails(int id);
-	
+
+    public List<User> getAllUserDetails(int id);
+
 	public boolean isUserPresent(int id);
 
 	public UserRepository getUserRepository();

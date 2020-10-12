@@ -1,31 +1,17 @@
 package rmit.com.sept.sept;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonFormat;
 //import com.webencyclop.demo.model.Role;
-
-import rmit.com.sept.*;
-
-//import com.sun.istack.NotNull; 
+//import com.sun.istack.NotNull;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 //
-import javax.validation.constraints.*;
-
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 //@IdClass(CompositeKey.class)
@@ -224,7 +210,13 @@ public class User {
 	 public String toString() { 
 		
 	      return "User [ name: "+email+", password: "+ password + " , :user_type :admin]"; 
-	 }  
-	
+	 }
 
+
+	//added these for put request
+	public String getUserType() { return this.userType; }
+	public void setUserType(String userType) { this.userType= userType; }
+	public boolean getIsWorker() { return this.isWorker; }
+	public int getCompanyID() { return this.company_id; }
+	public int getWorkerID() { return this.worker_id;}
 }

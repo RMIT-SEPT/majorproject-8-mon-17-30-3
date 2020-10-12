@@ -100,7 +100,41 @@ public class UserServiceImpl implements UserService {
 
         return template.query(sql, rm);
     }
-	
+
+    //added to use in put request
+    @Override
+    public List<User> getAllUserDetails(int id) {
+
+        String sql = "select * from user where user.user_id = '" + id + "'";
+        RowMapper<User> rm = new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user = new User(resultSet.getString("firstname"),
+                        resultSet.getString("lastname"),
+                        resultSet.getString("email"));
+                user.setName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setCompanyID(resultSet.getInt("company_id"));
+                user.setCompanyName(resultSet.getString("company_name"));
+                user.setIsCompany(resultSet.getBoolean("is_company"));
+                user.setWorker(resultSet.getBoolean("is_worker"));
+                user.setNumber(resultSet.getString("number"));
+                user.setServiceName(resultSet.getString("service_name"));
+                user.setStatus(resultSet.getString("status"));
+                user.setUserType(resultSet.getString("user_type"));
+                user.setWorkerID(resultSet.getInt("worker_id"));
+                System.out.println(user.getName());
+                System.out.println(user.getLastName());
+
+                userList.add(user);
+                return user;
+            }
+        };
+
+        return template.query(sql, rm);
+    }
 
     @Override
     public int findIdLogin(String email){

@@ -13,7 +13,7 @@ import java.sql.Statement;
 @SpringBootApplication
 public class SeptApplication {
 	private static WebMvcConfig web;
-	private static String password = "Susstain098.";
+	private static String password = "boxcutter34";
 	public static void main(String[] args) {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
 		String encodedPassword = passwordEncoder.encode("password");
