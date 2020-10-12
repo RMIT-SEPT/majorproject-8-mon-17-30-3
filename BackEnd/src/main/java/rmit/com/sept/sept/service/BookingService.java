@@ -18,4 +18,12 @@ public interface BookingService {
 	public BookingRepository getBookingRepository();
 
 	public void deleteBooking(int id);
+	
+	public List<Booking> getUserBooking(int userID);
+	
+	public List<Booking> getPastBooking(int userID);
+	
+	public List<Booking> getWorkerBooking(String workerName);
+
+	
 }

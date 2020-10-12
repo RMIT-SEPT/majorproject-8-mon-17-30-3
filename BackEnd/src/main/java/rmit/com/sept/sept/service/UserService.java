@@ -19,9 +19,19 @@ public interface UserService {
     
     public int findIdLogin(String username);
 
+    public String findIdName(String username);
+
     public String findUserType(int id);
+
+	public String findUserTypeByID(int id);
 
     public List<User> getList();
 //	void getDetailsForProfile(int id);
+    
+    public List<User> getRegisteredCompanyID();
+    
+    public List<User> getRegisteredWorkerID();
+
+    
 
 }

@@ -1,32 +1,20 @@
 package rmit.com.sept.sept;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonFormat;
 //import com.webencyclop.demo.model.Role;
-
-import rmit.com.sept.*;
-
-//import com.sun.istack.NotNull; 
+//import com.sun.istack.NotNull;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 //
-import javax.validation.constraints.*;
-
-import org.hibernate.validator.constraints.Length;
 
 @Entity
+//@IdClass(CompositeKey.class)
 @Table(name = "user")
 public class User {
 
@@ -56,6 +44,9 @@ public class User {
 	@Column(name = "isCompany")
 	private boolean isCompany;
 	
+	@Column(name = "isWorker")
+	private boolean isWorker;
+	
 	@Column(name = "status")
 	private String status;
 	
@@ -64,6 +55,10 @@ public class User {
 	@Column(name = "company_id")
 	public int company_id;
 
+//	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "worker_id")
+	public int worker_id;
 
 //	@NotNull(message="Company name is compulsory")
 	@Column(name = "company_name")
@@ -75,7 +70,8 @@ public class User {
 	
 	@Column(name = "number")
 	public String number;
-	
+
+	@Column(name = "user_type")
 	public String userType;
 
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -92,6 +88,12 @@ public class User {
 		this.email = email;
     }
     
+    public User(int company_id, int worker_id) {
+ 		this.company_id = company_id;
+ 		this.worker_id = worker_id;
+     }
+     
+     
     public User(String email, String userType ) {
     	this.email = email;
     	this.userType = userType;
@@ -189,10 +191,35 @@ public class User {
 		this.roles = roles;
 	}
 	
+	public boolean getWorker() {
+		return isWorker;
+	}
+	
+	public void setWorker(boolean worker) {
+		this.isWorker = worker;
+	}
+	
+	public void setCompanyID(int companyID) {
+		this.company_id = companyID;
+	}
+	
+	public void setWorkerID(int workerID) {
+		this.worker_id = workerID;
+	}
+	
+	
 	 public String toString() { 
 		
 	      return "User [ name: "+email+", password: "+ password + " , :user_type :admin]"; 
 	 }  
 	
+
+	 public void setUserType(String userType){
+		this.userType = userType;
+	 }
+
+	 public String getUserType(){
+		return this.userType;
+	 }
 
 }

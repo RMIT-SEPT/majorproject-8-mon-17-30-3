@@ -128,6 +128,17 @@ public class UserServiceImpl implements UserService {
       
     }
 
+
+    public String findUserTypeByID(int id){
+		for(User user : userList){
+			if(user.getId()==id)
+			{
+				return user.getUserType();
+			}
+		}
+		return " ";
+	}
+
     @Override
     public String findUserType(int id){
 
@@ -147,6 +158,9 @@ public class UserServiceImpl implements UserService {
                 }
                 if(userId == 2 ){
                     userType = "SITE_USER";
+                }
+                if(userId == 3 ) {
+                	userType = "WORKER_USER";
                 }
                 System.out.println(userType);
             }
@@ -197,7 +211,60 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
+	@Override
+	public List<User> getRegisteredCompanyID() {
+		String sql = "select user.company_id from user";
+        RowMapper<User> rm = new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user = new User(resultSet.getInt("company_id"), 0);
+                return user;
+            }
+        };
 
+        return template.query(sql, rm);
+	}
+
+	@Override
+	public List<User> getRegisteredWorkerID() {
+		String sql = "select user.worker_id from user";
+        RowMapper<User> rm = new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user = new User(0, resultSet.getInt("worker_id"));
+                return user;
+            }
+        };
+
+        return template.query(sql, rm);
+	}
+
+	@Override
+	public String findIdName(String name) {
+        String id = "";
+		try {
+			String url = "jdbc:mysql://127.0.0.1:3306/sept?useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"; 
+	        Connection conn = DriverManager.getConnection(url,"root",main.getPassword());
+	        Statement st = conn.createStatement(); 
+	        ResultSet rs;
+	        
+            rs = st.executeQuery("SELECT user_id FROM user WHERE user.firstname ='"+name+"'");
+            while ( rs.next() ) {
+                 id = rs.getString("firstname");
+                 System.out.println(id);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+		
+		return id;
+      
+	}
+
+
+	
 
 
 
