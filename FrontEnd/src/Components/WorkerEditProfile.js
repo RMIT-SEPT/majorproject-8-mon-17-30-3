@@ -12,7 +12,7 @@ export default class EditProfile extends Component {
         company_name:"",
         email: "",
         is_company: "",
-        is_worker: "0",
+        is_worker: "",
         lastname: "",
         firstname: "",
         number:"",
@@ -41,16 +41,8 @@ export default class EditProfile extends Component {
             this.setState({status: response.data.status})
             this.setState({user_type: response.data.user_type})
             this.setState({worker_id: response.data.worker_id})
-
-            console.log("res data");
-            console.log(this.state);
         });
     }
-    companyhandler = (event) => {
-        this.setState({
-            company: event.target.value
-        });
-    };
     emailhandler = (event) => {
         this.setState({
             email: event.target.value
@@ -80,7 +72,7 @@ export default class EditProfile extends Component {
             company_name: this.state.company_id,
             email: this.state.email,
             is_company: this.state.is_company,
-            is_worker: this.state.is_worker,
+            is_worker: "1",
             lastName: this.state.lastname,
             name: this.state.firstname,
             password: this.state.password,
@@ -90,10 +82,6 @@ export default class EditProfile extends Component {
             user_type: this.state.user_type,
             worker_id: this.state.worker_id
         };
-
-
-        console.log("state prop");
-        console.log(this.state.user_id)
 
         const id = this.state.user_id;
        
@@ -105,7 +93,7 @@ export default class EditProfile extends Component {
             })
             .catch(err => console.log(err));
 
-        console.log(user)
+        
     }
 
     

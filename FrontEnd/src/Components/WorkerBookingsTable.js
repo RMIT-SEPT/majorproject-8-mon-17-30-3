@@ -3,7 +3,7 @@ import { Table } from 'reactstrap';
 import './CSS/global.css';
 import AdminHeader from './Layout/AdminHeader'
 import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
-
+import {cancel} from './CancelBooking'
 
 const WorkerBookingsTable=({data})=>{
     return(
@@ -17,6 +17,8 @@ const WorkerBookingsTable=({data})=>{
           <th>Worker Name</th>
           <th>Date </th>
           <th>Time</th>
+          <th>Cancel</th>
+          
           </thead>
         </table>
              <div> {
@@ -28,6 +30,7 @@ const WorkerBookingsTable=({data})=>{
                         <td className="text-center">{d.workerName}</td>
                         <td className="text-center">{d.date}</td>
                         <td className="text-center">{d.time}</td>
+                        <td className="text-center"><button type="button" class="btn btn-danger" onClick={ () => cancel(d.bookingID) }>Cancel</button></td>
                       </tbody>          
                     </table>  
                   </div>

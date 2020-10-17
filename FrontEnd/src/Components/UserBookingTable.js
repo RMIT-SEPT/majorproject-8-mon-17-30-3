@@ -19,6 +19,7 @@ const UserBookingsTable=({data})=>{
           <th>Service Name</th>
           <th>Worker Name</th>
           <th>Time</th>
+          <th>Cancel</th>
           </thead>
         </table>
              <div> {

@@ -29,7 +29,7 @@ const WorkerProfile=()=>{
                         <hr />
                             <h4>Your name:</h4><p> {Data.firstName} {Data.lastName}</p>
                             <h4>Email:</h4><p> {Data.email}</p>
-                            <Link to="EditProfile" class="btn btn-info mt-4" role="button">Edit Profile</Link>
+                            <Link to="WorkerEditProfile" class="btn btn-info mt-4" role="button">Edit Profile</Link>
                             <br/>
                             <Link to="WorkerHome" class="btn btn-info mt-4" role="button">Worker Home</Link>
                 </div>
