@@ -55,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/getWorkerBooking").permitAll()
                 .antMatchers("/deleteBooking/{id}").permitAll()
                 .antMatchers("/users/{id}").permitAll()
+                .antMatchers("/acceptWorker/{id}").permitAll()
                 .antMatchers("/editUser/{id}").permitAll()
                 .antMatchers("/createBooking").permitAll()
                 .antMatchers("/createWorker").permitAll()

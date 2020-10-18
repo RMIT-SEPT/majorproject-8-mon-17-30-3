@@ -128,17 +128,6 @@ public class UserServiceImpl implements UserService {
       
     }
 
-
-    public String findUserTypeByID(int id){
-		for(User user : userList){
-			if(user.getId()==id)
-			{
-				return user.getUserType();
-			}
-		}
-		return " ";
-	}
-
     @Override
     public String findUserType(int id){
 
@@ -173,6 +162,17 @@ public class UserServiceImpl implements UserService {
 		return userType;
       
     }
+
+	public String findUserTypeByID(int id){
+		for(User user : userList){
+			if(user.getId()==id)
+			{
+				return user.getUserType();
+			}
+		}
+		return " ";
+	}
+
 
 	@Override
 	public int findByUsername(String username) {
@@ -251,7 +251,8 @@ public class UserServiceImpl implements UserService {
             rs = st.executeQuery("SELECT user_id FROM user WHERE user.firstname ='"+name+"'");
             while ( rs.next() ) {
                  id = rs.getString("firstname");
-                 System.out.println(id);
+                 
+                System.out.println(id);
             }
             conn.close();
         } catch (Exception e) {

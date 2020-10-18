@@ -21,9 +21,9 @@ public interface UserService {
 
     public String findIdName(String username);
 
-    public String findUserType(int id);
-
 	public String findUserTypeByID(int id);
+
+    public String findUserType(int id);
 
     public List<User> getList();
 //	void getDetailsForProfile(int id);

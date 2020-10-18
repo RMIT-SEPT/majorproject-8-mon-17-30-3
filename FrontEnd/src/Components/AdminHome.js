@@ -19,6 +19,7 @@ class AdminHome extends Component {
                             <a className="btn btn-info btn-block" href="AdminCreateBooking">Create a Booking</a>
                             <a className="btn btn-info btn-block" href="AdminProfile">View Details</a>
                             <a className="btn btn-info btn-block" href="Bookings">View All Bookings</a>
+                            <a className="btn btn-info btn-block" href="RegisterWorker">Register Worker</a>
                         </div>
                     </header>
                 </body>

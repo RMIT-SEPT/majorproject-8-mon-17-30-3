@@ -47,6 +47,11 @@ class Login extends Component {
                     pathname: '/CustomerHome',
                 });
             }
+            else if(information.userType == 'WORKER_USER'){
+                this.props.history.push({
+                    pathname: '/WorkerHome',
+                });
+            }
             else{
                 alert(`INVALID CREDENTIALS`)
             }

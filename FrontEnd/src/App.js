@@ -14,13 +14,20 @@ import AdminHome from './Components/AdminHome'
 import CustomerHome from './Components/CustomerHome' 
 import Profile from './Components/Profile'
 import AdminProfile from './Components/AdminProfile'
-import BookingComponent from './Components/BookingComponent'
 import AllBookings from './Components/AllBookings'
 import Bookings from './Components/Bookings'
 import Register from './Components/Register'
 import AdminCreateBooking from './Components/AdminCreateBooking';
 import About from './Components/About'
-
+import RegisterWorker from './Components/RegisterWorker' 
+import WorkerHome from './Components/WorkerHome'
+import UserBookingsTable from './Components/UserBookingTable'
+import UserBookings from './Components/UserBookings'
+import PastBookings from './Components/PastBookings'
+import WorkerProfile from './Components/WorkerProfile'
+import WorkerBookings from './Components/WorkerBookings'
+import EditProfile from './Components/EditProfile'
+import WorkerEditProfile from './Components/WorkerEditProfile'
 
 function App() {
   
@@ -31,19 +38,29 @@ function App() {
          <Switch>
          <Route path="/Login" component={Login}></Route>
          <Route path="/Register" component={Register}></Route>
+         <Route path="/RegisterWorker" component={RegisterWorker}></Route>
          <Route exact path="/" component={Login}></Route>
 
               <Route path="/Home" component={Home}></Route>
               <Route path="/CustomerHome" component={CustomerHome}></Route>
               <Route path="/Profile" component={Profile}></Route>
+              <Route path="/EditProfile" component={EditProfile}></Route>
+              <Route path="/WorkerEditProfile" component={WorkerEditProfile}></Route>
               <Route path="/CreateBooking" component={CreateBooking}></Route>
               <Route path="/About" component={About}></Route>
               <Route path="/Contact" component={Contact}></Route>
 
               <Route path="/AdminHome" component={AdminHome}></Route>
+              <Route path="/WorkerHome" component={WorkerHome}></Route>
               <Route path="/AdminProfile" component={AdminProfile}></Route>
               <Route path="/AdminCreateBooking" component={AdminCreateBooking}></Route>
               <Route path="/Bookings" component={Bookings}></Route>       
+              <Route path="/UserBookings" component={UserBookings}></Route>       
+              <Route path="/PastBookings" component={PastBookings}></Route>
+              <Route path="/WorkerProfile" component={WorkerProfile}></Route>
+              <Route path="/WorkerBookings" component={WorkerBookings}></Route>       
+       
+       
           </Switch>
       </BrowserRouter> 
     </div>

@@ -47,6 +47,9 @@ public class User {
 	@Column(name = "isWorker")
 	private boolean isWorker;
 	
+//	@Column(name = "workerStatus")
+//	private boolean workerStatus;
+	
 	@Column(name = "status")
 	private String status;
 	
@@ -70,8 +73,7 @@ public class User {
 	
 	@Column(name = "number")
 	public String number;
-
-	@Column(name = "user_type")
+	
 	public String userType;
 
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -208,18 +210,25 @@ public class User {
 	}
 	
 	
-	 public String toString() { 
+//	public void setWorkerStatus(boolean accepted) {
+//		this.workerStatus = accepted;
+//	}
+//	
+//	public boolean getWorkerStatus() {
+//		return workerStatus;
+//	}
+
+	public void setUserType(String userType){
+		this.userType = userType;
+	}
+
+	public String getUserType(){
+		return this.userType;
+	}
+	public String toString() { 
 		
-	      return "User [ name: "+email+", password: "+ password + " , :user_type :admin]"; 
+	      return "User [ name: " + email+", password: " + password + " , :user_type :admin]"; 
 	 }  
 	
-
-	 public void setUserType(String userType){
-		this.userType = userType;
-	 }
-
-	 public String getUserType(){
-		return this.userType;
-	 }
 
 }

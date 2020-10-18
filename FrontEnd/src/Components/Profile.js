@@ -19,6 +19,7 @@ const Profile=()=>{
                 console.log(err);
             })
     },[])
+    
     return(
         <div>
         <Header/>
@@ -29,6 +30,8 @@ const Profile=()=>{
                         <hr />
                             <h4>Your name:</h4><p> {Data.firstName} {Data.lastName}</p>
                             <h4>Email:</h4><p> {Data.email}</p>
+                            <Link to="EditProfile" class="btn btn-info mt-4" role="button">Edit Profile</Link>
+                            <br/>
                             <Link to="CustomerHome" class="btn btn-info mt-4" role="button">Customer Home</Link>
                 </div>
            </div>

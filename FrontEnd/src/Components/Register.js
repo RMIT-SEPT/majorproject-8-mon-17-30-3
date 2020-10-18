@@ -51,7 +51,7 @@ class Register extends Component {
             serviceName: event.target.value
         });
     };
-    
+
     mobileHandler = (event) => {
         this.setState({
             number: event.target.value
@@ -72,8 +72,8 @@ class Register extends Component {
             lastName: this.state.lastName,
             email: this.state.email,
             password: this.state.password,
-            companyName: this.state.companyName,
             serviceName: this.state.serviceName,
+            companyName: this.state.companyName,
             number: this.state.number,
         };
 
@@ -158,11 +158,11 @@ class Register extends Component {
                             placeholder="Company name"
                             class="form-control" />
 
-                        <p className="form-text">Service name</p>    
+                    <p className="form-text">Service Name</p>
                         <input type="text"
                             value={this.state.serviceName}
                             onChange={this.serviceNameHandler}
-                            placeholder="Service name"
+                            placeholder="Service Name"
                             class="form-control" />
 
                         <p className="form-text">Mobile number</p>

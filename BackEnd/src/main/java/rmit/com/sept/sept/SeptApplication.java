@@ -24,11 +24,11 @@ public class SeptApplication {
 	        Statement st = conn.createStatement(); 
 	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(3,'WORKER_USER','WORKER_USER')");
 
-	        st.executeUpdate("CREATE TABLE role(role_id INT(50) NOT NULL AUTO_INCREMENT,role_desc VARCHAR(50), role_name VARCHAR(50), CONSTRAINT role_pk PRIMARY KEY(role_id))");
+//	        st.executeUpdate("CREATE TABLE role(role_id INT(50) NOT NULL AUTO_INCREMENT,role_desc VARCHAR(50), role_name VARCHAR(50), CONSTRAINT role_pk PRIMARY KEY(role_id))");
 
 	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(1,'ADMIN_USER','ADMIN_USER')");
 	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(2,'SITE_USER','SITE_USER')");
-//	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(3,'WORKER_USER','WORKER_USER')");
+	        st.executeUpdate("INSERT IGNORE INTO role(role_id,role_desc,role_name)VALUES(3,'WORKER_USER','WORKER_USER')");
 
 
 	        conn.close();
