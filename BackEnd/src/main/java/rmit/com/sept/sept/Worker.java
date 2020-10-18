@@ -23,7 +23,8 @@ public class Worker {
 	@NotNull(message="Worker name is compulsory")
 	@Column(name = "worker_name")
 	public String worker_name;
-
+	
+	
 	
 	@Column(name = "company_name")
 	public String company_name;
@@ -59,6 +60,48 @@ public class Worker {
 		this.password = password;
 		
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setCompanyName(String company_name) {
+		this.company_name = company_name;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	
+	public String getNumber() {
+		return number;
+	}
+	
+	public String getCompanyName() {
+		return company_name;
+	}
+	
+	public String getWorkerName() {
+		return worker_name;
+	}
+
+	public void setWorkerName(String worker_name) {
+		this.worker_name = worker_name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 
 
 }

@@ -65,6 +65,7 @@ export default class ViewBooking extends Component {
             </div>
           </div>
         </div>
+        
         </div>
       
     );

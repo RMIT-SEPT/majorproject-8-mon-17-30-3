@@ -31,6 +31,8 @@ class CustomerHome extends Component {
                     <div className="container-fluid col-md-8">
                         <a className="btn btn-info btn-block" href="CreateBooking">Create a Booking</a>
                         <a className="btn btn-info btn-block" href="Profile">View Details</a>
+                        <a className="btn btn-info btn-block" href="/UserBookings">View Bookings</a>
+                        <a className="btn btn-info btn-block" href="/PastBookings">View Past Bookings</a>
                     </div>
                 </header>
             </body>

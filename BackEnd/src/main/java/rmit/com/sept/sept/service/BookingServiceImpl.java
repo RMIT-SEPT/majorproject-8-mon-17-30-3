@@ -58,7 +58,7 @@ public class BookingServiceImpl implements BookingService {
                 Booking booking = new Booking(
                 		resultSet.getInt("user_id"),
                 		resultSet.getInt("booking_id"),
-                        resultSet.getString("date"),
+                        resultSet.getDate("date"),
                         resultSet.getString("time"),
                         resultSet.getString("servicename"),
                         resultSet.getString("worker_name"));
@@ -91,4 +91,66 @@ public class BookingServiceImpl implements BookingService {
 		return this.bookingRepository;
 	}
 
+	@Override
+	public List<Booking> getUserBooking(int userID) {
+		String sql = "select * from booking where booking.user_id  = '" + userID + "'" ;
+        RowMapper<Booking> rm = new RowMapper<Booking>() {
+            @Override
+            public Booking mapRow(ResultSet resultSet, int i) throws SQLException {
+                Booking booking = new Booking(
+                		resultSet.getInt("user_id"),
+                		resultSet.getInt("booking_id"),
+                        resultSet.getDate("date"),
+                        resultSet.getString("time"),
+                        resultSet.getString("servicename"),
+                        resultSet.getString("worker_name"));
+               
+                return booking;
+            }
+        };
+
+        return template.query(sql, rm);
+	}
+
+	@Override
+	public List<Booking> getPastBooking(int userID) {
+		String sql = "select * from booking where booking.date < CURRENT_DATE() AND booking.user_id  = '" + userID + "'" ;
+        RowMapper<Booking> rm = new RowMapper<Booking>() {
+            @Override
+            public Booking mapRow(ResultSet resultSet, int i) throws SQLException {
+                Booking booking = new Booking(
+                		resultSet.getInt("user_id"),
+                		resultSet.getInt("booking_id"),
+                        resultSet.getDate("date"),
+                        resultSet.getString("time"),
+                        resultSet.getString("servicename"),
+                        resultSet.getString("worker_name"));
+               
+                return booking;
+            }
+        };
+
+        return template.query(sql, rm);
+	}
+	
+	@Override
+	public List<Booking> getWorkerBooking(String userID) {
+		String sql = "select * from booking where booking.worker_name  = '" + userID + "'" ;
+        RowMapper<Booking> rm = new RowMapper<Booking>() {
+            @Override
+            public Booking mapRow(ResultSet resultSet, int i) throws SQLException {
+                Booking booking = new Booking(
+                		resultSet.getInt("user_id"),
+                		resultSet.getInt("booking_id"),
+                        resultSet.getDate("date"),
+                        resultSet.getString("time"),
+                        resultSet.getString("servicename"),
+                        resultSet.getString("worker_name"));
+               
+                return booking;
+            }
+        };
+
+        return template.query(sql, rm);
+	}
 }
